@@ -1,0 +1,18 @@
+version: "2.0"
+
+stories:
+  - story: ask_originators -> utter_guide_to_ask_institutional_purpose -> dont_know
+    steps:
+      - intent: ask_originators
+      - action: utter_originators
+      - action: utter_guide_to_ask_institutional_purpose
+      - intent: dont_know
+      - action: utter_institutinal_purpose
+
+  - story: ask_originators -> utter_guide_to_ask_institutional_purpose -> i_know
+    steps:
+      - intent: ask_originators
+      - action: utter_originators
+      - action: utter_guide_to_ask_institutional_purpose
+      - intent: i_know
+      - action: utter_praise
