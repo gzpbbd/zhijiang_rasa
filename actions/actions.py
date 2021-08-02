@@ -1,27 +1,118 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
+from typing import Any, Text, Dict, List
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet, AllSlotsReset, BotUttered
+
+domain_to_text = {'team': '团队信息', 'ocean_bot': '海底软体机器人', 'land_bot': '陆地双足机器人', 'sky_bot': '空中载人机器人',
+                  'space_bot': '地外探测机器人', 'cloud_braind': '智能机器人云脑平台'}
 
 
-# This is a simple example for a custom action which utters "Hello World!"
+class ActionDisplayMainInterface(Action):
 
-# from typing import Any, Text, Dict, List
-#
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+    def name(self) -> Text:
+        return "action_display_main_interface"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="可以看一下我屏幕上提供的界面哟，你想要了解哪个方面的内容呢？")
+        dispatcher.utter_message(text="DISPLAY: {团队信息,深海软体机器人,陆地双足机器人,空中载人机器人,地外探测机器人,智能机器人云脑平台}")
+        return []
+
+
+class ActionDisplaySecondInterface(Action):
+
+    def name(self) -> Text:
+        return "action_display_second_interface"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        domain = tracker.get_slot('domain')
+        if domain == 'team':
+            dispatcher.utter_message(text="DISPLAY:{人数及平均年龄,人员组成}")
+        elif domain == 'ocean_bot':
+            dispatcher.utter_message(text="DISPLAY:{结构特点,成果}")
+        elif domain == 'land_bot':
+            dispatcher.utter_message(text="DISPLAY:{成立时间,足球机器人,二代机器人,弹琴机器人}")
+        elif domain == 'sky_bot':
+            dispatcher.utter_message(text="DISPLAY:{目标,研究重点,当前进度}")
+        elif domain == 'space_bot':
+            dispatcher.utter_message(text="DISPLAY:{背景,合作单位,目前成果}")
+        elif domain == 'cloud_brain':
+            dispatcher.utter_message(text="DISPLAY:{背景}")
+        return []
+
+
+class ActionSetSlotDomain(Action):
+
+    def name(self) -> Text:
+        return "action_set_slot_domain"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        last_intent = tracker.get_intent_of_latest_message()
+        domain_slot = None
+        if last_intent == 'to_domain_team':
+            domain_slot = SlotSet('domain', 'team')
+        elif last_intent == 'to_domain_ocean_bot':
+            domain_slot = SlotSet('domain', 'ocean_bot')
+        # elif last_intent == 'to_land_bot_domain':
+        #     domain_slot = SlotSet('domain', 'land_bot')
+        # elif last_intent == 'to_sky_bot_domain':
+        #     domain_slot = SlotSet('domain', 'sky_bot')
+        # elif last_intent == 'to_space_bot_domain':
+        #     domain_slot = SlotSet('domain', 'space_bot')
+        # elif last_intent == 'to_cloud_brain_domain':
+        #     domain_slot = SlotSet('domain', 'cloud_brain')
+
+        if domain:
+            return [domain_slot]
+        else:
+            return []
+
+
+class ActionCommandToTargetLocation(Action):
+
+    def name(self) -> Text:
+        return "action_command_to_target_location"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        domain = tracker.get_slot('domain')
+        dispatcher.utter_message(text="MOVE:{{target: {}}}".format(domain))
+        return []
+
+
+class ActionCommandReturnHome(Action):
+
+    def name(self) -> Text:
+        return "action_command_return_home"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="DISPLAY: {}")
+        dispatcher.utter_message(text="MOVE: {target: home}")
+        return [SlotSet('domain', None)]
+
+
+class ActionSecondInterfaceRequestSelectingContent(Action):
+
+    def name(self) -> Text:
+        return "action_second_interface_request_selecting_content"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        domain = tracker.get_slot('domain')
+        domain_text = ''
+        if domain in domain_to_text.keys():
+            domain_text = domain_to_text[domain]
+
+        dispatcher.utter_message(text="{}方面包括屏幕上显示的这些内容，我可以为你顺序介绍，也可以你说出其中一项的名字，我为你单独介绍哟。".format(domain_text))
+        return []

@@ -5,59 +5,72 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- ask_ability:
-    use_entities: true
-- ask_land_area:
-    use_entities: true
-- ask_founding_date:
-    use_entities: true
-- ask_originators:
-    use_entities: true
-- ask_institutional_purpose:
-    use_entities: true
-- ask_research_direction:
-    use_entities: true
-- ask_research_direction_about_intellisense:
-    use_entities: true
-- ask_research_direction_about_smart_network:
-    use_entities: true
-- ask_research_direction_about_smart_computing:
-    use_entities: true
-- ask_research_direction_about_smart_system:
-    use_entities: true
-- unsupported_features:
-    use_entities: true
-- want_to_join:
-    use_entities: true
-- ask_achivement:
-    use_entities: true
-- dont_know:
-    use_entities: true
-- i_know:
-    use_entities: true
-- praise:
-    use_entities: true
-- greet:
-    use_entities: true
-- goodbye:
-    use_entities: true
-- affirm:
-    use_entities: true
-- deny:
-    use_entities: true
-- bot_challenge:
-    use_entities: true
-- other:
-    use_entities: true
-- query_weather:
-    use_entities: true
-- nlu_fallback:
-    use_entities: true
-- you_too_bad:
-    use_entities: true
+  - ask_ability:
+      use_entities: true
+  - ask_land_area:
+      use_entities: true
+  - ask_founding_date:
+      use_entities: true
+  - ask_originators:
+      use_entities: true
+  - ask_institutional_purpose:
+      use_entities: true
+  - ask_research_direction:
+      use_entities: true
+  - ask_research_direction_about_intellisense:
+      use_entities: true
+  - ask_research_direction_about_smart_network:
+      use_entities: true
+  - ask_research_direction_about_smart_computing:
+      use_entities: true
+  - ask_research_direction_about_smart_system:
+      use_entities: true
+  - unsupported_features:
+      use_entities: true
+  - want_to_join:
+      use_entities: true
+  - ask_achivement:
+      use_entities: true
+  - dont_know:
+      use_entities: true
+  - i_know:
+      use_entities: true
+  - praise:
+      use_entities: true
+  - greet:
+      use_entities: true
+  - goodbye:
+      use_entities: true
+  - affirm:
+      use_entities: true
+  - deny:
+      use_entities: true
+  - bot_challenge:
+      use_entities: true
+  - other:
+      use_entities: true
+  - query_weather:
+      use_entities: true
+  - nlu_fallback:
+      use_entities: true
+  - you_too_bad:
+      use_entities: true
+  # 针对机器人中心一楼场景
+  - enter
+  - to_domain_team
+  - have_arrived_target_place
+  - ask_team_domain_number_and_age
+  - ask_team_domain_staff_composition
+  - introduce_one_by_one
+  - to_main_interface
+  # 增加其它领域内容（除开team domain）
+  - to_domain_ocean_bot
+  - ask_ocean_bot_domain_feature
+  - ask_ocean_bot_domain_achivement
+
 entities:
-- time
-- place
+  - time
+  - place
 slots:
   city:
     type: rasa.shared.core.slots.TextSlot
@@ -69,67 +82,114 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: true
+  # 针对机器人中心一楼场景
+  domain:
+    type: categorical
+    values:
+      - team
+      - ocean_bot
+      - land_bot
+      - sky_bot
+      - space_bot
+      - cloud_brain
+  target_place:
+    type: text
+
 responses:
   utter_ability:
-  - text: 我可以给你介绍之江实验室哟，比如之江实验室的研究方向，创办机构，创建目的，最新成果哟。你想了解什么呢？
+    - text: 我可以给你介绍之江实验室哟，比如之江实验室的研究方向，创办机构，创建目的，最新成果哟。你想了解什么呢？
   utter_land_area:
-  - text: 目前还在扩建呢，具体有多大我就不清楚了，反正很大很大就是了。
+    - text: 目前还在扩建呢，具体有多大我就不清楚了，反正很大很大就是了。
   utter_founding_date:
-  - text: 之江实验室成立于2017年9月6日。
+    - text: 之江实验室成立于2017年9月6日。
   utter_originators:
-  - text: 之江实验室是由浙江省政府、浙江大学、阿里巴巴共同举办的研发机构，团队规模超过1800人。
+    - text: 之江实验室是由浙江省政府、浙江大学、阿里巴巴共同举办的研发机构，团队规模超过1800人。
   utter_institutinal_purpose:
-  - text: 我们之江实验室是为了推动科技创新，希望能打造出国家战略级的科技力量
+    - text: 我们之江实验室是为了推动科技创新，希望能打造出国家战略级的科技力量
   utter_research_direction:
-  - text: 我们的重点在四个科研方向，分别是智能感知，智能网络，智能计算，和智能系统。我们目前各个方向都做出了许多成果哟，你想了解哪个方向呢？
+    - text: 我们的重点在四个科研方向，分别是智能感知，智能网络，智能计算，和智能系统。我们目前各个方向都做出了许多成果哟，你想了解哪个方向呢？
   utter_research_direction_about_intellisense:
-  - text: 智能感知围绕多维感知融合、类人感知、极限感知的需求，全面研究智能感知的机理和方法，突破高性能高分辨传感器件和芯片、极限精密测量、类人智能感知、泛在智能健康感知、超高灵敏环境感知、多维数据智能融合处理等关键技术，打造完整的智能感知理论和技术体系。无人系统，自动驾驶都是智能感知的代表应用哦。
+    - text: 智能感知围绕多维感知融合、类人感知、极限感知的需求，全面研究智能感知的机理和方法，突破高性能高分辨传感器件和芯片、极限精密测量、类人智能感知、泛在智能健康感知、超高灵敏环境感知、多维数据智能融合处理等关键技术，打造完整的智能感知理论和技术体系。无人系统，自动驾驶都是智能感知的代表应用哦。
   utter_research_direction_about_smart_network:
-  - text: 智能网络研究并攻克智能网络基础理论、新型网络体系架构、高效能通信体制等关键科学与技术问题，发展下一代无线通信、超高速光通信与光互联、高性能计算网络、多模态智慧网络、工业互联网安全等核心技术，实现功能、拓扑、标识、安全等全维可定义的新型网络体系结构与平台。近年来5G的发展，将会很大程度推动智能网络领域的发展呢。
+    - text: 智能网络研究并攻克智能网络基础理论、新型网络体系架构、高效能通信体制等关键科学与技术问题，发展下一代无线通信、超高速光通信与光互联、高性能计算网络、多模态智慧网络、工业互联网安全等核心技术，实现功能、拓扑、标识、安全等全维可定义的新型网络体系结构与平台。近年来5G的发展，将会很大程度推动智能网络领域的发展呢。
   utter_research_direction_about_smart_computing:
-  - text: 智能计算瞄准世界科技前沿和国家重大战略需求，研究存算一体、神经拟态类脑计算、光计算、生物计算等新型计算模型和器件，操作系统、编程语言与编译器、广域协同软件、智能软件工程等核心软件，社会智能治理、未来交通、军事智能等重大支撑平台，为数字中国的科技创新体系和产业发展体系提供先进的计算芯片、强大的计算能力、高效智能的计算平台。
+    - text: 智能计算瞄准世界科技前沿和国家重大战略需求，研究存算一体、神经拟态类脑计算、光计算、生物计算等新型计算模型和器件，操作系统、编程语言与编译器、广域协同软件、智能软件工程等核心软件，社会智能治理、未来交通、军事智能等重大支撑平台，为数字中国的科技创新体系和产业发展体系提供先进的计算芯片、强大的计算能力、高效智能的计算平台。
   utter_research_direction_about_smart_system:
-  - text: 面向社会治理、国防安全、数字经济等重大战略需求，全面攻克自主无人系统、信息物理融合、医疗健康和社会治理、金融科技等各类典型智能系统的关键技术和工程实现方法，研发智能系统共性关键技术与应用平台，打造广域协同、普惠泛在、随需接入的高效能智能系统，支撑智慧时代新型数字基础设施建设和战略新兴产业发展。
+    - text: 面向社会治理、国防安全、数字经济等重大战略需求，全面攻克自主无人系统、信息物理融合、医疗健康和社会治理、金融科技等各类典型智能系统的关键技术和工程实现方法，研发智能系统共性关键技术与应用平台，打造广域协同、普惠泛在、随需接入的高效能智能系统，支撑智慧时代新型数字基础设施建设和战略新兴产业发展。
   utter_thanks:
-  - text: 谢谢夸奖，小江很高兴呢。
-  - text: 谢谢
+    - text: 谢谢夸奖，小江很高兴呢。
+    - text: 谢谢
   utter_not_supported:
-  - text: 我还不会哟，还没人教我呢。不过我能给你介绍之江实验室，你想了解什么呢？
+    - text: 我还不会哟，还没人教我呢。不过我能给你介绍之江实验室，你想了解什么呢？
   utter_how_to_join:
-  - text: 这个我就不太清楚哦，你可以查询我们的官网，上面有招募信息的。
+    - text: 这个我就不太清楚哦，你可以查询我们的官网，上面有招募信息的。
   utter_achivement:
-  - text: 我们成果可多了，比如我们有有一项成果是软体机器人，它可以在潜入万米深海，也可以在深海自主游动。这项成果已经发表在了国际顶级期刊《Nature》封面上，厉害吧。
+    - text: 我们成果可多了，比如我们有有一项成果是软体机器人，它可以在潜入万米深海，也可以在深海自主游动。这项成果已经发表在了国际顶级期刊《Nature》封面上，厉害吧。
   utter_praise:
-  - text: 哇，你真厉害
+    - text: 哇，你真厉害
   utter_guide_to_more_qustions:
-  - text: 我可以给你介绍之江实验室哟，比如之江实验室的研究方向，创办机构，创建目的，最新成果。你想了解什么呢？
+    - text: 我可以给你介绍之江实验室哟，比如之江实验室的研究方向，创办机构，创建目的，最新成果。你想了解什么呢？
   utter_guide_to_ask_institutional_purpose:
-  - text: 你知道我们的创建目的是什么吗？
+    - text: 你知道我们的创建目的是什么吗？
   utter_greet:
-  - text: 你好，欢迎来到之江实验室。
-  utter_goodbye:
-  - text: 拜拜，欢迎下次再来哦
+    - text: 你好，欢迎来到之江实验室。
+  #  utter_goodbye:
+  #    - text: 拜拜，欢迎下次再来哦
   utter_iamabot:
-  - text: 我不是机器人，你是机器人吗？
+    - text: 我不是机器人，你是机器人吗？
   utter_fallback:
-  - text: 对不起，我没能听懂，你能再说一遍吗？
+    - text: 对不起，我没能听懂，你能再说一遍吗？
   utter_ask_city:
-  - text: 哪个地方的天气？
+    - text: 哪个地方的天气？
   utter_ask_query_weather_form_time:
-  - text: 什么时候的天气？
+    - text: 什么时候的天气？
   utter_weather:
-  - text: 哇，{time}的{city}会出太阳。
+    - text: 哇，{time}的{city}会出太阳。
   utter_i_will_be_better:
-  - text: 我很多功能还在开发中呢，我之后会变得更厉害的，请相信我呀
+    - text: 我很多功能还在开发中呢，我之后会变得更厉害的，请相信我呀
+  # 针对机器人中心一楼场景
+  utter_provide_guidance:
+    - text: 你好，我是小江，负责这里日常的接待工作。需要我带你参观这个展厅吗？
+  utter_if_need:
+    - text: 好的，有需要的时候，可以找我哟。
+  utter_brief_introduction:
+    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
+  utter_follow_me:
+    - text: 好的，请跟我来吧。
+#  action_second_interface_request_selecting_content:
+#    - text: "{domain}方面包括屏幕上显示的这些内容，我可以为你顺序介绍，也可以你说出其中一项的名字，我为你单独介绍哟。"
+  utter_team_domain_number_and_age:
+      - text: 我们目前的全职人员已经超过了110人了，平均年龄只有29岁呢，是一个朝气蓬勃的团队
+  utter_second_interface_select_next_content:
+    - text: 你还想了解这方面的什么内容呢？或者你可以说“返回主界面”哟。
+  utter_team_domain_staff_composition:
+    - text: 我们的团队里有两位院士，他们是我们的主任。另外还有首席科学家，教授pi，和一部分青年科学家
+  utter_next_question:
+    - text: 你还想了解什么呢？如果想看主界面的其它内容，请说”返回主界面“。如果不需要我讲解了，请对我说再见哦
+  utter_goodbye:
+    - text: 那我回去我原来的位置了，希望你玩得愉快，再见
+  # 增加其它领域内容（除开team domain）
+  utter_ocean_bot_domain_feature:
+    - text: 软体机器人与我们平常熟知的机器人不太一样，结构非常柔软。它的特点主要有两个。第一是它内部没有电机，它的驱动是靠它的两翼。它的两翼是一种人工肌肉哦。第二是它没有一般机器人需要的金属的耐压壳
+  utter_ocean_bot_domain_achivement:
+    - text: 我们的软体机器人创造了两个世界首次。第一是它在马里亚纳海沟实现了万米的无耐压壳的实验。第二是它实现了在南海三千米的自主游动的实验。这些成果发笔在了国际顶尖期刊nature的封面上面，它是一个非常轰动的创新呢！
+
 actions:
-- action_query_weather
+  - action_query_weather
+  # 针对机器人中心一楼场景
+  - action_display_main_interface
+  - action_display_second_interface
+  - action_set_slot_domain
+  - action_command_to_target_location
+  - action_command_return_home
+  - action_second_interface_request_selecting_content
 forms:
   query_weather_form:
     required_slots:
       city:
-      - entity: place
-        type: from_entity
+        - entity: place
+          type: from_entity
       time:
-      - entity: time
-        type: from_entity
+        - entity: time
+          type: from_entity
 e2e_actions: []

@@ -16,3 +16,19 @@ stories:
       - action: utter_guide_to_ask_institutional_purpose
       - intent: i_know
       - action: utter_praise
+
+  # 针对机器人中心一楼场景
+  - story: 不需要讲解
+    steps:
+      - intent: enter
+      - action: utter_provide_guidance
+      - intent: deny
+      - action: utter_if_need
+  - story: 需要讲解
+    steps:
+      - intent: enter
+      - action: utter_provide_guidance
+      - intent: affirm
+      - action: utter_brief_introduction
+      - action: action_display_main_interface
+
