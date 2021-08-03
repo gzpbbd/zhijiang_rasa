@@ -1,23 +1,6 @@
 version: "2.0"
 
 stories:
-  - story: ask_originators -> utter_guide_to_ask_institutional_purpose -> dont_know
-    steps:
-      - intent: ask_originators
-      - action: utter_originators
-      - action: utter_guide_to_ask_institutional_purpose
-      - intent: dont_know
-      - action: utter_institutinal_purpose
-
-  - story: ask_originators -> utter_guide_to_ask_institutional_purpose -> i_know
-    steps:
-      - intent: ask_originators
-      - action: utter_originators
-      - action: utter_guide_to_ask_institutional_purpose
-      - intent: i_know
-      - action: utter_praise
-
-  # 针对机器人中心一楼场景
   - story: 不需要讲解
     steps:
       - intent: enter
@@ -30,5 +13,14 @@ stories:
       - action: utter_provide_guidance
       - intent: affirm
       - action: utter_brief_introduction
-      - action: action_display_main_interface
+      # 一级列表选择
+      - action: action_display_top_list
+      - intent: choose_top_level
+      - action: utter_follow_me
+      - action: action_command_to_target_location
+      - intent: have_arrived_target_location
+      # 二级列表选择
+      - action: action_display_second_list
+      - intent: choose_second_level
+      - action: action_introduce_second_level_content
 

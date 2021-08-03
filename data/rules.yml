@@ -1,165 +1,33 @@
 version: "2.0"
 rules:
-  - rule: ask_ability
+  - rule: 有人来了
     steps:
-      - intent: ask_ability
-      - action: utter_ability
-  - rule: ask_land_area
-    steps:
-      - intent: ask_land_area
-      - action: utter_land_area
-  - rule: ask_founding_date
-    steps:
-      - intent: ask_founding_date
-      - action: utter_founding_date
-  - rule: ask_originators
-    steps:
-      - intent: ask_originators
-      - action: utter_originators
-      - action: utter_guide_to_ask_institutional_purpose
-  - rule: ask_institutional_purpose
-    steps:
-      - intent: ask_institutional_purpose
-      - action: utter_institutinal_purpose
-  - rule: ask_research_direction
-    steps:
-      - intent: ask_research_direction
-      - action: utter_research_direction
-  - rule: ask_research_direction_about_intellisense
-    steps:
-      - intent: ask_research_direction_about_intellisense
-      - action: utter_research_direction_about_intellisense
-  - rule: ask_research_direction_about_smart_network
-    steps:
-      - intent: ask_research_direction_about_smart_network
-      - action: utter_research_direction_about_smart_network
-  - rule: ask_research_direction_about_smart_system
-    steps:
-      - intent: ask_research_direction_about_smart_system
-      - action: utter_research_direction_about_smart_system
-  - rule: praise
-    steps:
-      - intent: praise
-      - action: utter_thanks
-  - rule: unsupported_features
-    steps:
-      - intent: unsupported_features
-      - action: utter_not_supported
-  - rule: want_to_join
-    steps:
-      - intent: want_to_join
-      - action: utter_how_to_join
-  - rule: ask_achivement
-    steps:
-      - intent: ask_achivement
-      - action: utter_achivement
-  - rule: greet
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_guide_to_more_qustions
-  #  - rule: Say goodbye anytime the user says goodbye
-  #    steps:
-  #      - intent: goodbye
-  #      - action: utter_goodbye
-  - rule: Say 'I am a bot' anytime the user challenges
-    steps:
-      - intent: bot_challenge
-      - action: utter_iamabot
-  - rule: fallback
-    steps:
-      - intent: nlu_fallback
-      - action: utter_fallback
-  - rule: active form (query weather)
-    steps:
-      - intent: query_weather
-      - action: query_weather_form
-      - active_loop: query_weather_form
-  - rule: finish form (query weather)
-    condition:
-      - active_loop: query_weather_form
-    steps:
-      - action: query_weather_form
-      - active_loop: null
-      - action: action_query_weather
-  - rule: ask_research_direction_about_smart_computing
-    steps:
-      - intent: ask_research_direction_about_smart_computing
-      - action: utter_research_direction_about_smart_computing
-  - rule: you_too_bad
-    steps:
-      - intent: you_too_bad
-      - action: utter_i_will_be_better
-
-  # 针对机器人中心一楼场景
-  - rule: 去 团队信息
-    steps:
-      - intent: to_domain_team
-      - action: action_set_slot_domain
-      - action: utter_follow_me
-      - action: action_command_to_target_location
-
-  - rule: 到达目的地
-    steps:
-      - intent: have_arrived_target_place
-      - action: action_display_second_interface
-      - action: action_second_interface_request_selecting_content
-
-  - rule: 问二级界面内容 人数及平均年龄
-    steps:
-      - intent: ask_team_domain_number_and_age
-      - action: utter_team_domain_number_and_age
-      - action: utter_second_interface_select_next_content
-  - rule: 问二级界面内容 人员组成
-    steps:
-      - intent: ask_team_domain_staff_composition
-      - action: utter_team_domain_staff_composition
-      - action: utter_second_interface_select_next_content
-  - rule: 逐一介绍 团队信息
-    condition:
-      - slot_was_set:
-          - domain: "team"
-    steps:
-      - intent: introduce_one_by_one
-      - action: utter_team_domain_number_and_age
-      - action: utter_team_domain_staff_composition
-      - action: utter_next_question
+      - intent: enter
+      - action: utter_provide_guidance
   - rule: 结束引导
     steps:
       - intent: goodbye
       - action: utter_goodbye
       - action: action_command_return_home
 
+  - rule: 逐一介绍
+    steps:
+      - intent: introduce_one_by_one
+      - action: action_introduce_one_by_one
+
   - rule: 返回主界面
     steps:
       - intent: to_main_interface
-      - action: action_display_main_interface
+      - action: action_display_top_list
 
-  # 增加其它领域的内容
-  - rule: 去 海底软体机器人
+  - rule: 去一级界面列表对应的目标位置
     steps:
-      - intent: to_domain_ocean_bot
-      - action: action_set_slot_domain
+      - intent: choose_top_level
       - action: utter_follow_me
       - action: action_command_to_target_location
-  - rule: 逐一介绍 海底软体机器人
-    condition:
-      - slot_was_set:
-          - domain: "ocean_bot"
-    steps:
-      - intent: introduce_one_by_one
-      - action: utter_ocean_bot_domain_feature
-      - action: utter_ocean_bot_domain_achivement
-      - action: utter_next_question
-  - rule: 问二级界面内容 ocean_bot 结构特点
-    steps:
-      - intent: ask_ocean_bot_domain_feature
-      - action: utter_ocean_bot_domain_feature
-      - action: utter_second_interface_select_next_content
 
-  - rule: 问二级界面内容 ocean_bot 成果
+  - rule: 到达目的地
     steps:
-      - intent: ask_ocean_bot_domain_achivement
-      - action: utter_ocean_bot_domain_achivement
-      - action: utter_second_interface_select_next_content
+      - intent: have_arrived_target_location
+      - action: action_display_second_list
 
