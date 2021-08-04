@@ -28,7 +28,7 @@ slots:
       - 智能低空载人飞行器
       - 智能机器人云脑平台
       - 高能效服务型双足机器人
-      - 高运动性能的双足人形机器人
+      - 高运动性能双足人形机器人
   second_level:
     type: categorical
     values:
@@ -60,6 +60,8 @@ responses:
     - text: 好的，请跟我来吧。
   utter_goodbye:
     - text: 那我回去我原来的位置了，希望你玩得愉快，再见
+  utter_wrong_option:
+    - text: 对不起，我没有明白你的选项，可以重新选择一下吗？
 
 actions:
   - action_start_introduce

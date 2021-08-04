@@ -31,3 +31,18 @@ rules:
       - intent: have_arrived_target_location
       - action: action_display_second_list
 
+  - rule: 选择一级列表失败
+    steps:
+      - intent: choose_top_level
+      - slot_was_set:
+          - top_level: __other__
+      - action: utter_wrong_option
+
+
+  - rule: 选择一级列表失败
+    steps:
+      - intent: choose_second_level
+      - slot_was_set:
+          - second_level: __other__
+      - action: utter_wrong_option
+

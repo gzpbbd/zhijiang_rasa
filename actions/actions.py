@@ -35,6 +35,7 @@ def create_window(title='', buttons=[]):
 def create_move_action(target_location=''):
     return {'type': 'bot_action', 'name': 'move', 'target_location': target_location}
 
+
 class ActionStartIntroduce(Action):
 
     def name(self) -> Text:
@@ -47,13 +48,12 @@ class ActionStartIntroduce(Action):
         return []
 
 
-
 class ActionDisplayTopList(Action):
 
     def name(self) -> Text:
         return "action_display_top_list"
 
-    def run(self, dispatcher: CollectingDispatcher, 
+    def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         buttons = []
@@ -73,7 +73,7 @@ class ActionDisplaySecondList(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         top_level = tracker.get_slot('top_level')
-        if not top_level: # 如果没有指定是哪方面的内容，直接退出
+        if not top_level:  # 如果没有指定是哪方面的内容，直接退出
             print('ActionDisplaySecondList: top_level is null')
             return []
 
@@ -146,4 +146,3 @@ class ActionIntroduceOneByOne(Action):
         text = '关于{}的主要内容我都已经介绍完了哟，很有趣对吧。你还想了解什么呢？如果想要返回主界面，请说“返回主界面”。如果不需要我引导，请说”拜拜“哦。'.format(top_level)
         dispatcher.utter_message(text=text)
         return []
-
