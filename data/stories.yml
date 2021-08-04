@@ -12,7 +12,7 @@ stories:
       - intent: enter
       - action: utter_provide_guidance
       - intent: affirm
-      - action: utter_brief_introduction
+      - action: action_start_introduce
       # 一级列表选择
       - action: action_display_top_list
       - intent: choose_top_level

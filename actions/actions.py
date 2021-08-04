@@ -5,14 +5,26 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, AllSlotsReset, BotUttered
 import json
 
-contents_table = {'团队信息': ['人数及平均年龄', '人员组成'],
-                  '深海软体机器人': ['结构特点', '成果'],
-                  '陆地双足机器人': ['成立时间', '足球机器人', '二代机器人', '弹琴机器人'],
-                  '空中载人机器人': ['目标', '研究重点', '当前进度'],
-                  '地外探测机器人': ['背景', '合作单位', '目前成果'],
-                  '智能机器人云脑平台': ['背景']}
-with open('introduction.json', 'r') as f:
+# contents_table = {'团队信息': ['人数及平均年龄', '人员组成'],
+#                   '深海软体机器人': ['结构特点', '成果'],
+#                   '陆地双足机器人': ['成立时间', '足球机器人', '二代机器人', '弹琴机器人'],
+#                   '空中载人机器人': ['目标', '研究重点', '当前进度'],
+#                   '地外探测机器人': ['背景', '合作单位', '目前成果'],
+#                   '智能机器人云脑平台': ['背景']}
+
+# 读取讲解词文件
+filename = 'introduction/introduction.json'
+with open(filename, 'r') as f:
     all_introduction = json.load(f)
+# 单独得到 入场词
+beginning_text = all_introduction['入场词']
+all_introduction.pop('入场词')
+# 得到二层目录
+contents_table = {}
+for top_level in all_introduction.keys():
+    second_levels = all_introduction[top_level].keys()
+    contents_table[top_level] = list(second_levels)
+print(contents_table)
 
 
 def create_window(title='', buttons=[]):
@@ -22,6 +34,18 @@ def create_window(title='', buttons=[]):
 
 def create_move_action(target_location=''):
     return {'type': 'bot_action', 'name': 'move', 'target_location': target_location}
+
+class ActionStartIntroduce(Action):
+
+    def name(self) -> Text:
+        return "action_start_introduce"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text=beginning_text)
+        return []
+
 
 
 class ActionDisplayTopList(Action):
@@ -49,6 +73,9 @@ class ActionDisplaySecondList(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         top_level = tracker.get_slot('top_level')
+        if not top_level: # 如果没有指定是哪方面的内容，直接退出
+            print('ActionDisplaySecondList: top_level is null')
+            return []
 
         buttons = []
         for second_level in contents_table[top_level]:
@@ -120,18 +147,3 @@ class ActionIntroduceOneByOne(Action):
         dispatcher.utter_message(text=text)
         return []
 
-    # class ActionSecondInterfaceRequestSelectingContent(Action):
-#
-#     def name(self) -> Text:
-#         return "action_second_interface_request_selecting_content"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         domain = tracker.get_slot('domain')
-#         domain_text = ''
-#         if domain in domain_to_top_level.keys():
-#             domain_text = domain_to_top_level[domain]
-#
-#         dispatcher.utter_message(text="{}方面包括屏幕上显示的这些内容，我可以为你顺序介绍，也可以你说出其中一项的名字，我为你单独介绍哟。".format(domain_text))
-#         return []

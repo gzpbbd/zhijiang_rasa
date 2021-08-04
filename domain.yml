@@ -20,23 +20,49 @@ entities:
   - second_level
 slots:
   top_level:
-    type: text
+    type: categorical
+    values:
+      - 总体布局
+      - 深海机器人
+      - 地外探测项目
+      - 智能低空载人飞行器
+      - 智能机器人云脑平台
+      - 高能效服务型双足机器人
+      - 高运动性能的双足人形机器人
   second_level:
-    type: text
+    type: categorical
+    values:
+      - 研究重点
+      - 特色
+      - 解决方案
+      - 项目背景
+      - 主要特色
+      - 团队建设
+      - 项目目标
+      - 各系列简要介绍
+      - 现实意义
+      - 工程应用
+      - 研究进展
+      - 灵感来源
+      - 当前成果
+      - 定位
+      - 机器人产业核心难题
+      - 目标
 
 responses:
   utter_provide_guidance:
     - text: 你好，我是小江，负责这里日常的接待工作。需要我带你参观这个展厅吗？
   utter_if_need:
     - text: 好的，有需要的时候，可以找我哟。
-  utter_brief_introduction:
-    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
+#  utter_brief_introduction:
+#    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
   utter_follow_me:
     - text: 好的，请跟我来吧。
   utter_goodbye:
     - text: 那我回去我原来的位置了，希望你玩得愉快，再见
 
 actions:
+  - action_start_introduce
   - action_display_top_list
   - action_display_second_list
   - action_command_to_target_location
