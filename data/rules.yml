@@ -30,6 +30,18 @@ rules:
     steps:
       - intent: have_arrived_target_location
       - action: action_display_second_list
+  - rule: 到达机器人home位置
+    steps:
+      - intent: have_arrived_target_location
+      - slot_was_set:
+          - target_location: home
+      - action: action_listen
+  - rule: 到达未知位置
+    steps:
+      - intent: have_arrived_target_location
+      - slot_was_set:
+          - target_location: __other__
+      - action: action_listen
 
   - rule: 选择一级列表失败
     steps:
@@ -39,7 +51,7 @@ rules:
       - action: utter_wrong_option
 
 
-  - rule: 选择一级列表失败
+  - rule: 选择二级列表失败
     steps:
       - intent: choose_second_level
       - slot_was_set:

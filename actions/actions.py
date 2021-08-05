@@ -95,9 +95,9 @@ class ActionCommandToTargetLocation(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        domain = tracker.get_slot('top_level')
-        dispatcher.utter_message(json_message=create_move_action(target_location=domain))
-        return []
+        top_level = tracker.get_slot('top_level')
+        dispatcher.utter_message(json_message=create_move_action(target_location=top_level))
+        return [SlotSet('target_location', top_level)]
 
 
 class ActionCommandReturnHome(Action):
@@ -110,7 +110,7 @@ class ActionCommandReturnHome(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(json_message=create_window(title='smile'))
         dispatcher.utter_message(json_message=create_move_action(target_location='home'))
-        return [SlotSet('top_level', None), SlotSet('second_level', None)]
+        return [SlotSet('top_level', None), SlotSet('second_level', None),SlotSet('target_location', 'home')]
 
 
 class ActionIntroduceSecondLevelContent(Action):

@@ -48,6 +48,17 @@ slots:
       - 定位
       - 机器人产业核心难题
       - 目标
+  target_location:
+    type: categorical
+    values:
+      - 总体布局
+      - 深海机器人
+      - 地外探测项目
+      - 智能低空载人飞行器
+      - 智能机器人云脑平台
+      - 高能效服务型双足机器人
+      - 高运动性能双足人形机器人
+      - home
 
 responses:
   utter_provide_guidance:
