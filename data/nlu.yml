@@ -101,7 +101,7 @@ nlu:
 
   - intent: choose_second_level
     examples: |
-      - [特色](second_level)
+      - [主要特点](second_level)
       - [各系列简要介绍](second_level)
       - [简要介绍]{"entity":"second_level","value":"各系列简要介绍"}
       - [各系列介绍]{"entity":"second_level","value":"各系列简要介绍"}
@@ -115,8 +115,8 @@ nlu:
       - [目标](second_level)
       - [工程应用](second_level)
       - [应用]{"entity":"second_level","value":"工程应用"}
-      - [主要特色](second_level)
-      - [特色]{"entity":"second_level","value":"主要特色"}
+      - [主要特点](second_level)
+      - [特点]{"entity":"second_level","value":"主要特点"}
       - [现实意义](second_level)
       - [意义]{"entity":"second_level","value":"现实意义"}
       - [定位](second_level)

@@ -14,6 +14,7 @@ intents:
   - introduce_one_by_one
   - goodbye
   - to_main_interface
+  - nlu_fallback
 
 entities:
   - top_level
@@ -33,10 +34,9 @@ slots:
     type: categorical
     values:
       - 研究重点
-      - 特色
+      - 主要特点
       - 解决方案
       - 项目背景
-      - 主要特色
       - 团队建设
       - 项目目标
       - 各系列简要介绍
@@ -65,14 +65,17 @@ responses:
     - text: 你好，我是小江，负责这里日常的接待工作。需要我带你参观这个展厅吗？
   utter_if_need:
     - text: 好的，有需要的时候，可以找我哟。
-#  utter_brief_introduction:
-#    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
+  #  utter_brief_introduction:
+  #    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
   utter_follow_me:
     - text: 好的，请跟我来吧。
   utter_goodbye:
     - text: 那我回去我原来的位置了，希望你玩得愉快，再见
   utter_wrong_option:
     - text: 对不起，我没有明白你的选项，可以重新选择一下吗？
+  utter_nlu_fallback:
+    - text: 对不起，我没能听懂，你能再说一遍吗？
+
 
 actions:
   - action_start_introduce

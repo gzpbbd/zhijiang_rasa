@@ -58,3 +58,8 @@ rules:
           - second_level: __other__
       - action: utter_wrong_option
 
+  - rule: nlu 识别失败
+    steps:
+      - intent: nlu_fallback
+      - action: utter_nlu_fallback
+
