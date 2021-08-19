@@ -85,4 +85,5 @@ actions:
   - action_command_return_home
   - action_introduce_second_level_content
   - action_introduce_one_by_one
+  - action_chat
 e2e_actions: []

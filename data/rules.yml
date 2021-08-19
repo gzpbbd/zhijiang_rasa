@@ -61,5 +61,5 @@ rules:
   - rule: nlu 识别失败
     steps:
       - intent: nlu_fallback
-      - action: utter_nlu_fallback
+      - action: action_chat
 
