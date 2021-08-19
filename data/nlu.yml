@@ -1,5 +1,11 @@
 version: "2.0"
 nlu:
+  - intent: whoareyou
+    examples: |
+      - 你是谁
+      - 你叫啥
+      - 你是名字是什么
+      - 我怎么称呼你
   - intent: enter
     examples: |
       - 小江，我来了

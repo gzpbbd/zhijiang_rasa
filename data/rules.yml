@@ -4,6 +4,10 @@ rules:
     steps:
       - intent: enter
       - action: utter_provide_guidance
+  - rule: 问机器人名字
+    steps:
+      - intent: whoareyou
+      - action: utter_bot_name
   - rule: 结束引导
     steps:
       - intent: goodbye
