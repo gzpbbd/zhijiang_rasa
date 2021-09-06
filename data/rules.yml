@@ -13,23 +13,19 @@ rules:
       - intent: goodbye
       - action: utter_goodbye
       - action: action_command_return_home
-
   - rule: 逐一介绍
     steps:
       - intent: introduce_one_by_one
       - action: action_introduce_one_by_one
-
   - rule: 返回主界面
     steps:
       - intent: to_main_interface
       - action: action_display_top_list
-
   - rule: 去一级界面列表对应的目标位置
     steps:
       - intent: choose_top_level
       - action: utter_follow_me
       - action: action_command_to_target_location
-
   - rule: 到达目的地
     steps:
       - intent: have_arrived_target_location
@@ -46,24 +42,115 @@ rules:
       - slot_was_set:
           - target_location: __other__
       - action: action_listen
-
   - rule: 选择一级列表失败
     steps:
       - intent: choose_top_level
       - slot_was_set:
           - top_level: __other__
       - action: utter_wrong_option
-
-
   - rule: 选择二级列表失败
     steps:
       - intent: choose_second_level
       - slot_was_set:
           - second_level: __other__
       - action: utter_wrong_option
-
   - rule: nlu 识别失败
     steps:
       - intent: nlu_fallback
       - action: action_chat
-
+  - rule: stupid rule
+    steps:
+      - intent: stupid
+      - action: utter_stupid_reply
+  - rule: rule_ai_situation
+    steps:
+      - intent: ai_situation
+      - action: utter_ai_situation
+  - rule: rule_beautiful
+    steps:
+      - intent: beautiful
+      - action: utter_beautiful
+  - rule: rule_clever
+    steps:
+      - intent: clever
+      - action: utter_clever
+  - rule: rule_cute
+    steps:
+      - intent: cute
+      - action: utter_cute
+  - rule: rule_howmanystaff
+    steps:
+      - intent: howmanystaff
+      - action: utter_howmanystaff
+  - rule: rule_howmuchtime
+    steps:
+      - intent: howmuchtime
+      - action: utter_howmuchtime
+  - rule: rule_howoldareyou
+    steps:
+      - intent: howoldareyou
+      - action: utter_age
+  - rule: rule_import_device
+    steps:
+      - intent: import_device
+      - action: utter_import_device
+  - rule: rule_import_field
+    steps:
+      - intent: import_field
+      - action: utter_import_field
+  - rule: rule_import_research
+    steps:
+      - intent: import_research
+      - action: utter_import_research
+  - rule: rule_overall_goals
+    steps:
+      - intent: overall_goals
+      - action: utter_overall_goals
+  - rule: rule_primary_mission
+    steps:
+      - intent: primary_mission
+      - action: utter_primary_mission
+  - rule: rule_whatcanyoudo
+    steps:
+      - intent: whatcanyoudo
+      - action: utter_whatcanyoudo
+  - rule: rule_whatiszhijianglab
+    steps:
+      - intent: whatiszhijianglab
+      - action: utter_whatiszhijianglab
+  - rule: rule_zj_aidp_goal
+    steps:
+      - intent: zj_aidp_goal
+      - action: utter_aidp_goal
+  - rule: rule_zj_aidp_research
+    steps:
+      - intent: zj_aidp_research
+      - action: utter_aidp_research
+  - rule: rule_zj_jxyjzx_research
+    steps:
+      - intent: zj_jxyjzx_research
+      - action: utter_jxyjzx_research
+  - rule: rule_zj_wlwlyjy_mission
+    steps:
+      - intent: zj_wlwlyjy_mission
+      - action: utter_wlwlyjy_mission
+  - rule: rule_zj_wlwlyjy_research
+    steps:
+      - intent: zj_wlwlyjy_research
+      - action: utter_wlwlyjy_research
+  - rule: rule_zj_zngzyjy_mission
+    steps:
+      - intent: zj_zngzyjy_mission
+      - action: utter_zngzyjy_mission
+  - rule: rule_zj_zngzyjy_research
+    steps:
+      - intent: zj_zngzyjy_research
+      - action: utter_zngzyjy_research
+  - rule: rule_howmanydepartment
+    steps:
+      - intent: howmanydepartment
+      - action: utter_howmanydepartment
+  - rule: rule_whenzhijianglabfound
+    steps:
+      - intent: whenzhijianglabfound
+      - action: utter_found_year

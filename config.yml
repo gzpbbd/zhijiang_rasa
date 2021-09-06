@@ -26,6 +26,6 @@ policies:
     epochs: 200
     constrain_similarities: true
   - name: RulePolicy
-    core_fallback_threshold: 0.6
+    core_fallback_threshold: 0.5
     core_fallback_action_name: action_default_fallback
     enable_fallback_prediction: true

@@ -5,24 +5,87 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-  - enter
-  - whoareyou
-  - deny
-  - affirm
-  - choose_top_level
-  - have_arrived_target_location
-  - choose_second_level
-  - introduce_one_by_one
-  - goodbye
-  - to_main_interface
-  - nlu_fallback
-
+  - enter:
+      use_entities: true
+  - whoareyou:
+      use_entities: true
+  - deny:
+      use_entities: true
+  - affirm:
+      use_entities: true
+  - choose_top_level:
+      use_entities: true
+  - have_arrived_target_location:
+      use_entities: true
+  - choose_second_level:
+      use_entities: true
+  - introduce_one_by_one:
+      use_entities: true
+  - goodbye:
+      use_entities: true
+  - to_main_interface:
+      use_entities: true
+  - nlu_fallback:
+      use_entities: true
+  - stupid:
+      use_entities: true
+  - zj_aidp_research:
+      use_entities: true
+  - import_device:
+      use_entities: true
+  - zj_zngzyjy_research:
+      use_entities: true
+  - beautiful:
+      use_entities: true
+  - import_research:
+      use_entities: true
+  - cute:
+      use_entities: true
+  - import_field:
+      use_entities: true
+  - howmanystaff:
+      use_entities: true
+  - overall_goals:
+      use_entities: true
+  - primary_mission:
+      use_entities: true
+  - whatiszhijianglab:
+      use_entities: true
+  - zj_wlwlyjy_research:
+      use_entities: true
+  - zj_zngzyjy_mission:
+      use_entities: true
+  - ai_situation:
+      use_entities: true
+  - zj_aidp_goal:
+      use_entities: true
+  - howmuchtime:
+      use_entities: true
+  - clever:
+      use_entities: true
+  - whatcanyoudo:
+      use_entities: true
+  - howoldareyou:
+      use_entities: true
+  - zj_jxyjzx_research:
+      use_entities: true
+  - zj_wlwlyjy_mission:
+      use_entities: true
+  - zj_jxyjzx_introduce:
+      use_entities: true
+  - whenzhijianglabfound:
+      use_entities: true
+  - howmanydepartment:
+      use_entities: true
 entities:
   - top_level
   - second_level
 slots:
   top_level:
-    type: categorical
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
     values:
       - 总体布局
       - 深海机器人
@@ -32,7 +95,10 @@ slots:
       - 高能效服务型双足机器人
       - 高运动性能双足人形机器人
   second_level:
-    type: categorical
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
     values:
       - 研究重点
       - 主要特点
@@ -50,7 +116,10 @@ slots:
       - 机器人产业核心难题
       - 目标
   target_location:
-    type: categorical
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
     values:
       - 总体布局
       - 深海机器人
@@ -60,26 +129,85 @@ slots:
       - 高能效服务型双足机器人
       - 高运动性能双足人形机器人
       - home
-
 responses:
   utter_provide_guidance:
-    - text: 你好，我是小江，负责这里日常的接待工作。需要我带你参观这个展厅吗？
+    - text: 你好，我是小之，负责这里日常的接待工作。需要我带你参观这个展厅吗？
   utter_bot_name:
-    - text: 你好，我是小江！
+    - text: 你好，我是小之！
+    - text: 我是之江实验室的服务机器人小之
+    - text: 您好，我叫小之
   utter_if_need:
     - text: 好的，有需要的时候，可以找我哟。
-  #  utter_brief_introduction:
-  #    - text: 那我先简要介绍一下我们机器人中心吧。我们的使命是让机器人变革人类的生产生活。定位是充分发挥我们实验室在智能科学与技术方面的优势，提升机器人智能化水平，促进整个智能科学与技术研究的发展。我们计划打造一个智能社区，以智能机器人云脑平台为核心，布局了四个方向，分别是海陆空天四个位置的机器人。
   utter_follow_me:
-    - text: 好的，请跟我来吧。 
+    - text: 好的，请跟我来吧。
   utter_goodbye:
     - text: 那我回去我原来的位置了，希望你玩得愉快，再见
   utter_wrong_option:
     - text: 对不起，我没有明白你的选项，可以重新选择一下吗？
   utter_nlu_fallback:
     - text: 对不起，我没能听懂，你能再说一遍吗？
-
-
+  utter_stupid_reply:
+    - text: 我哪里做错了吗？
+    - text: 呜呜呜呜呜
+    - text: 我还在改进中，以后会更加完善的。
+  utter_aidp_research:
+    - text: 我们的人工智能研究院是研发建设新型超级智能计算机、人工智能开源开放平台、端边云分布式操作系统、智能物联基础支撑软件平台等研究设施。
+    - text: 我们的人工智能研究院围绕国际智能科技的发展前沿和国家重大战略需求，以构建新一代智能计算系统，创新人工智能理论与技术体系为目标开展研究，推动我国人工智能的创新发展和重大应用。研究院下设人工智能前沿理论、新型智能计算系统、人工智能算法与平台和融合智能四个研究中心。将研发建设新型超级智能计算机、人工智能开源开放平台、端边云分布式操作系统、智能物联基础支撑软件平台等研究设施。
+  utter_import_device:
+    - text: 我们有四大主要科研装置：极限感知科学装置、新一代工业控制系统安全科学装置、新一代人工智能开源开放科学装置、类脑智能计算
+    - text: 我们的主要科研装置是指极限感知科学装置、新一代工业控制系统安全科学装置、新一代人工智能开源开放科学装置、类脑智能计算
+    - text: 我们的四大科研装置是指极限感知科学装置、新一代工业控制系统安全科学装置、新一代人工智能开源开放科学装置、类脑智能计算
+  utter_wlwlyjy_research:
+    - text: 我们的未来网络研究院主要是支撑我国数字经济发展，研发建设新一代工业控制系统安全大科学装置、天基骨干网络与天地协同试验平台、B5G/6G系统仿真平台、网络信息安全大数据与态势感知平台、人工智能安全测试与评估平台等研究设施。
+  utter_jxyjzx_research:
+    - text: 我们的交叉研究中心的主要研究内容是为探索多学科深度交叉融合创新，设立智能机器人研究中心、城市大脑研究中心、网络健康大数据研究中心、网络大空间搜索研究中心、金融科技研究中心、战略研究中心、标准化研究中心、浙江大数据和数字政府研究院等8个交叉研究中心。
+  utter_wlwlyjy_mission:
+    - text: 我们的未来网络研究院是的使命是践行网络强国战略，目标是构建未来人机物融合所需的“泛在、安全、实时、可靠”的新型通信网络基础理论、核心技术和标准体系
+  utter_import_research:
+    - text: 我们的研究重点是智能感知、智能计算、智能网络和智能系统。
+    - text: 我们的四大研究方向具体是指：智能感知：以高性能感知为基础，以AI和先进数字计算为支撑，拓展感知范围和精度、智能处理多维多模态感知信号、实时响应环境和对象变化，形成新一代感知技术。 智能计算：以开展人工智能基础前沿研究为核心，创新计算模式、拓展计算空间、提高计算效能、加强计算协同。 智能网络：拓展现有网络连接的维度和广度，大幅提升网络传输质量和效率，强化泛在网络的安全性和可靠性。 智能系统：围绕产业创新、社会治理、民生服务等领域，开展人工智能应用技术与关键系统研究。
+  utter_import_field:
+    - text: 我们的主攻方向主要是聚焦人工智能和网络信息两大领域，重点在智能感知、智能计算、智能网络和智能系统四大方向开展基础性、前沿性技术研究，以全球视野谋划和推动创新
+    - text: 我们的主要研究领域是聚焦人工智能和网络信息两大领域，重点在智能感知、智能计算、智能网络和智能系统四大方向开展基础性、前沿性技术研究，以全球视野谋划和推动创新。
+    - text: 我们的研究重点主要是聚焦人工智能和网络信息两大领域，重点在智能感知、智能计算、智能网络和智能系统四大方向开展基础性、前沿性技术研究，以全球视野谋划和推动创新
+  utter_age:
+    - text: 一周岁了
+    - text: 满了一岁
+  utter_whatcanyoudo:
+    - text: 我可以带你参观展厅，陪你聊天!
+  utter_clever:
+    - text: 谢谢夸奖，你也很聪明
+  utter_primary_mission:
+    - text: 我们的主要任务是重大前沿基础研究与技术攻关、大科学装置和科研平台建设、国内外科研合作与交流、高层次科研人才培养、承担国家战略性人工智能创新项目、科研成果转移转化及其产业化。
+  utter_howmuchtime:
+    - text: 大约十分钟
+  utter_aidp_goal:
+    - text: 我们的人工智能研究院是围绕国际智能科技的发展前沿和国家重大战略需求，以构建新一代智能计算系统，创新人工智能理论与技术体系为目标开展研究
+  utter_ai_situation:
+    - text: 目前国内人工智能在很多方面都有了突破性进展。从之前的专注于完成某个特别设定的任务，如语音识别和翻译，一直致力于人工智能的的科大讯飞和阿里云、百度等，人工智能从基础研究、技术到产业，都进入了高速增长期。
+  utter_whatiszhijianglab:
+    - text: 之江实验室是浙江省委、省政府贯彻落实习近平总书记科技创新思想，深入实施创新驱动发展战略的重大科技创新平台，肩负了建设创新型国家、世界科技强国进程中的浙江责任与担当。实验室由浙江省人民政府、浙江大学、阿里巴巴集团共同举办，以国家目标和战略需求为导向，以重大科技任务攻关和大型科技基础设施建设为主线，以打造国家未来战略科技力量为目标，形成一批原创性、突破性、引领性、支撑性的重大科技成果，汇聚和培养一批具有全球影响力的高层次人才，建设世界一流新型研发机构。
+  utter_overall_goals:
+    - text: 我们是以整合协同一批重大科学基础设施、汇聚一批全球顶尖的研发团队、打造一个国际一流的基础研究基地、取得一批具有影响力的重大共性技术成果、支撑引领具有世界竞争力的创新型产业集群发展、建成国家实验室作为总体目标
+    - text: 我们科研的主要目标是整合协同一批重大科学基础设施、汇聚一批全球顶尖的研发团队、打造一个国际一流的基础研究基地、取得一批具有影响力的重大共性技术成果、支撑引领具有世界竞争力的创新型产业集群发展、建成国家实验室
+    - text: 我们实验室的总体目标是整合协同一批重大科学基础设施、汇聚一批全球顶尖的研发团队、打造一个国际一流的基础研究基地、取得一批具有影响力的重大共性技术成果、支撑引领具有世界竞争力的创新型产业集群发展、建成国家实验室
+  utter_zngzyjy_research:
+    - text: 我们智能感知研究院以研发高灵敏度的精密测量装置和仪器，高精准度的智能感知机理、芯片、器件和系统为目标展开研究。研究院下设量子传感、超级感知和智能芯片三个研究中心。将研发量子精密测量大科学装置、光纤地球超级感知科学装置、多模态大脑观测装置、超级感知实验室群、先进微纳加工、先进器件测试等研究设施
+    - text: 我们的智能感知研究院以战略急需的精密测量和先进传感技术创新为使命，以研发高灵敏度的精密测量装置和仪器，高精准度的智能感知机理、芯片、器件和系统为目标展开研究。研究院下设量子传感、超级感知和智能芯片三个研究中心。将研发量子精密测量大科学装置、光纤地球超级感知科学装置、多模态大脑观测装置、超级感知实验室群、先进微纳加工、先进器件测试等研究设施。
+  utter_zngzyjy_mission:
+    - text: 我们的智能感知研究院以战略急需的精密测量和先进传感技术创新为使命，以研发高灵敏度的精密测量装置和仪器，高精准度的智能感知机理、芯片、器件和系统为目标展开研究。
+  utter_howmanystaff:
+    - text: 有超过1300名员工
+  utter_cute:
+    - text: 谢谢夸奖，你也很可爱
+  utter_beautiful:
+    - text: 谢谢夸奖，你也很好看
+  utter_found_year:
+    - text: 之江实验室成立于2017年9月6日
+    - text: 2017年9月6日成立
+  utter_howmanydepartment:
+    - text: 现在有20个部门，包括实验室领导办公室、交叉创新研究院、智能网络研究院、综合管理部、科研发展部、人力资源部等
+    - text: 有20个部门！科研部门包括交叉创新研究院、智能网络研究院、人工智能研究院等；职能部门包括综合管理部、条件保障部、发展合作部等
 actions:
   - action_start_introduce
   - action_display_top_list
@@ -89,4 +217,5 @@ actions:
   - action_introduce_second_level_content
   - action_introduce_one_by_one
   - action_chat
-e2e_actions: []
+forms: { }
+e2e_actions: [ ]

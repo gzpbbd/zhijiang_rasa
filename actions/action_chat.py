@@ -13,6 +13,7 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+import time
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
@@ -152,11 +153,14 @@ class ActionChat(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        tik=time.time()
         history = self.get_history(tracker)
-        print(history)
+        # print(history)
         history = [self.bot.tokenize(s) for s in history]
         text = self.bot.response(history)
         text = text.replace(' ', '')
+        tok=time.time()
+        # print(f'{text}: response time {tok-tik} sec')
         dispatcher.utter_message(text=text)
         return []
 
@@ -179,7 +183,8 @@ class ActionChat(Action):
                     if total_len + len(s) < max_len:
                         total_len += len(s)
                         s=" ".join(list(s.strip('，').replace(" ", "")))
-                        history.append(s)
+                        if len(s)<=30: #排除特别长的回复，这么长的回复大概率是问答给出的，模型训练数据里没见过，会给出质量很低的回复
+                            history.append(s)
                     else:
                         history = history[::-1]
                         return history
@@ -191,7 +196,8 @@ class ActionChat(Action):
         if s.strip().strip('，') and total_len + len(s) < max_len:
             total_len += len(s)
             s = " ".join(list(s.strip('，').replace(" ", "")))
-            history.append(s)
+            if len(s)<=30: #排除特别长的回复，这么长的回复大概率是问答给出的，模型训练数据里没见过，会给出质量很低的回复
+                history.append(s)
         history = history[::-1]
         return history
 
