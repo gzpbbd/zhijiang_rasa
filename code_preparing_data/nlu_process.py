@@ -130,6 +130,55 @@ def write_domain_file(all_nlu_data, filename=None):
     for entity in entities:
         print('  - {}'.format(entity), file=file)
 
+    # 写 entities 为 slots
+    print(file=file)
+    print('slots:', file=file)
+    for entity in entities:
+        print('  {}:'.format(entity), file=file)
+        print('    type: text', file=file)
+
+    # 写 action
+    print(file=file)
+    print('actions:', file=file)
+    for intent in intents:
+        print('  - action_{}'.format(intent), file=file)
+
+
+    if filename:
+        file.close()
+
+
+def write_rules_file(all_nlu_data, filename=None):
+    if filename:
+        print('write rules into', filename)
+        if not os.path.exists(os.path.dirname(filename)):
+            os.makedirs(os.path.dirname(filename))
+        file = open(filename, 'w', encoding='utf-8')
+    else:
+        file = sys.stdout
+
+    # 取出 intents 集合
+    intents = []
+    for entry in all_nlu_data:
+        intent = entry['intent']
+        intents.append(intent)
+    intents = set(intents)
+
+    # 读取 intent 对应的中文名
+    english2chinese = {}
+    df = pandas.read_csv('data/qa_database/二级结构中英文名.csv', sep='\t')
+    for english, chinese in zip(df['english'], df['chinese']):
+        english2chinese[english] = chinese
+
+    # 写 规则
+    print('version: "2.0"', file=file)
+    print('rules:', file=file)
+    for intent in intents:
+        print('  - rule: {}'.format(english2chinese[intent]), file=file)
+        print('    steps:', file=file)
+        print('      - intent: {}'.format(intent), file=file)
+        print('      - action: action_{}'.format(intent), file=file)
+
     if filename:
         file.close()
 
@@ -139,7 +188,7 @@ def write_domain_file(all_nlu_data, filename=None):
 # 成果-属性-简介，实体名：成果
 def achievement_properties_introduction(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/科研成果.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/科研成果.csv', sep='\t')
     achievements = list(set(df['成果名称']))
 
     # 模板
@@ -189,7 +238,7 @@ def institution_scientific__research__device(verbose=0):
 # 机构-属性-代表歌曲,institution_attribute_representative__song，实体：机构
 def institution_attribute_representative__song(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -212,12 +261,12 @@ def institution_attribute_representative__song(verbose=0):
 # 机构-属性-单位性质，实体：机构
 def institution_attribute_nature__of__unit(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构'])
     institutions = set(institutions)
     institutions_1 = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
 
-    df = pandas.read_csv('data/之江给的数据/机构间关系.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构间关系.csv', sep='\t')
     institutions = list(df['一级机构'])
     institutions = set(institutions)
     institutions_2 = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -299,7 +348,7 @@ def institution_attributes_values(verbose=0):
 # 机构-属性-简介,institution_properties_introduction，实体：机构
 def institution_properties_introduction(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -321,7 +370,7 @@ def institution_properties_introduction(verbose=0):
 # 机构-属性-建设目标,institution_attribute_construction__goal，实体：机构
 def institution_attribute_construction__goal(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -343,7 +392,7 @@ def institution_attribute_construction__goal(verbose=0):
 # 机构-属性-联系电话,institution_properties_contact__phone，实体：机构
 def institution_properties_contact__phone(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -364,7 +413,7 @@ def institution_properties_contact__phone(verbose=0):
 # 机构-属性-论坛,institution_properties_forum，实体：机构
 def institution_properties_forum(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -387,7 +436,7 @@ def institution_properties_forum(verbose=0):
 # 机构-属性-评价,institution_attribute_evaluation，实体：机构
 def institution_attribute_evaluation(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -408,7 +457,7 @@ def institution_attribute_evaluation(verbose=0):
 # 机构-属性-人数,organization_attributes_number__of__people，实体：机构
 def organization_attributes_number__of__people(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -433,7 +482,7 @@ def organization_attributes_number__of__people(verbose=0):
 # 机构-属性-使命,organization_attribute_mission，实体：机构
 def organization_attribute_mission(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -455,7 +504,7 @@ def organization_attribute_mission(verbose=0):
 # 机构-属性-特色文化,institution_attribute_characteristic__culture，实体：机构
 def institution_attribute_characteristic__culture(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -477,7 +526,7 @@ def institution_attribute_characteristic__culture(verbose=0):
 # 机构-属性-网址,institution_properties_url，实体：机构
 def institution_properties_url(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -499,7 +548,7 @@ def institution_properties_url(verbose=0):
 # 机构-属性-位置,institution_attribute_location，实体：机构
 def institution_attribute_location(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -520,7 +569,7 @@ def institution_attribute_location(verbose=0):
 # 机构-属性-英文名,institution_attribute_english__name，实体：机构
 def institution_attribute_english__name(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -542,7 +591,7 @@ def institution_attribute_english__name(verbose=0):
 # 机构-属性-战略目标,organization_attribute_strategic__objective，实体：机构
 def organization_attribute_strategic__objective(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -562,7 +611,7 @@ def organization_attribute_strategic__objective(verbose=0):
 # 机构-项目,institution_project，实体：机构
 def institution_project(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     values = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -584,7 +633,7 @@ def institution_project(verbose=0):
 # 机构-子机构,institution_sub__institution，实体：机构
 def institution_sub__institution(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     values = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -605,7 +654,7 @@ def institution_sub__institution(verbose=0):
 # 机构-项目,institution_project，实体：机构
 def institution_project(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -627,7 +676,7 @@ def institution_project(verbose=0):
 # 科研装置-属性-简介,scientific__research__device_properties_introduction，实体：科研装置
 def scientific__research__device_properties_introduction(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/科研装置.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/科研装置.csv', sep='\t')
     values = list(df['名称'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -649,7 +698,7 @@ def scientific__research__device_properties_introduction(verbose=0):
 # 项目-属性-发布时间,project_properties_release__time，实体：项目
 def project_properties_release__time(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/项目.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/项目.csv', sep='\t')
     values = list(df['名称'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -670,7 +719,7 @@ def project_properties_release__time(verbose=0):
 # 项目-属性-简介,project_properties_introduction，实体：项目
 def project_properties_introduction(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/项目.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/项目.csv', sep='\t')
     values = list(df['名称'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -692,7 +741,7 @@ def project_properties_introduction(verbose=0):
 # 项目-属性-名称,project_attribute_name，实体：项目
 def project_attribute_name(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/项目.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/项目.csv', sep='\t')
     values = list(df['名称'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -713,7 +762,7 @@ def project_attribute_name(verbose=0):
 # 项目-属性-上线时间,project_properties_online__time，实体：项目
 def project_properties_online__time(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/项目.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/项目.csv', sep='\t')
     values = list(df['名称'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -735,7 +784,7 @@ def project_properties_online__time(verbose=0):
 # 员工-属性-办公地点,employee_attribute_office__location，实体：员工
 def employee_attribute_office__location(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/人.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/人.csv', sep='\t')
     values = list(df['姓名'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -756,7 +805,7 @@ def employee_attribute_office__location(verbose=0):
 # 员工-属性-入职时间,employee_attribute_on_time，实体：员工
 def employee_attribute_on_time(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/人.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/人.csv', sep='\t')
     values = list(df['姓名'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -777,7 +826,7 @@ def employee_attribute_on_time(verbose=0):
 # 员工-属性-生日,employee_attribute_birthday，实体：员工
 def employee_attribute_birthday(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/人.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/人.csv', sep='\t')
     values = list(df['姓名'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -799,7 +848,7 @@ def employee_attribute_birthday(verbose=0):
 # 员工-属性-住址,employee_attribute_address，实体：员工
 def employee_attribute_address(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/人.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/人.csv', sep='\t')
     values = list(df['姓名'])
     values = set(values)
     values = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -821,11 +870,11 @@ def employee_attribute_address(verbose=0):
 # 职位-属性-任期,position_attribute_term，实体：职位
 def position_attribute_term(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/职位+智能.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/职位+智能.csv', sep='\t')
     values = list(df['职位'])
     values = set(values)
     values_position = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     institutions = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     institutions = set(institutions)
     institutions = [x for x in institutions if isinstance(x, str)]  # 移除 nan 元素
@@ -851,12 +900,12 @@ def position_attribute_term(verbose=0):
 # 机构-机构-关系,institution_institution_relationship，实体：职位
 def institution_institution_relationship(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     values = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     values = set(values)
     values_1 = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
 
-    df = pandas.read_csv('data/之江给的数据/机构间关系.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构间关系.csv', sep='\t')
     values = list(df['一级机构']) + list(df['二级机构'])
     values = set(values)
     values_2 = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -892,12 +941,12 @@ def institution_institution_relationship(verbose=0):
 # 机构-职员-属性-职位,institution_staff_attributes_position，实体：机构, 职位
 def institution_staff_attributes_position(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     values = list(df['一级机构']) + list(df['二级机构']) + list(df['三级机构'])
     values = set(values)
     institutions = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
 
-    df = pandas.read_csv('data/之江给的数据/机构（机构信息）.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/机构（机构信息）.csv', sep='\t')
     values = list(df['职位'])
     values = set(values)
     positions = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
@@ -965,3 +1014,5 @@ write_nlu_file(all_nlu_data, 'data/nlu/nlu_qa_data.yml')
 
 write_domain_file(all_nlu_data, 'data/domain/domain_qa_data.yml')
 # write_domain_file(all_nlu_data)
+
+write_rules_file(all_nlu_data, 'data/core/rules_qa_data.yml')

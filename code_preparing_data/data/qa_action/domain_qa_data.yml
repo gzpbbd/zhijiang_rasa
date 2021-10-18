@@ -1,0 +1,138 @@
+version: "2.0"
+rules:
+  - rule: achievement_properties_introduction
+    steps:
+      - intent: achievement_properties_introduction
+      - action: action_achievement_properties_introduction
+  - rule: institution_properties_url
+    steps:
+      - intent: institution_properties_url
+      - action: action_institution_properties_url
+  - rule: institution_project
+    steps:
+      - intent: institution_project
+      - action: action_institution_project
+  - rule: employee_attribute_on_time
+    steps:
+      - intent: employee_attribute_on_time
+      - action: action_employee_attribute_on_time
+  - rule: project_properties_online__time
+    steps:
+      - intent: project_properties_online__time
+      - action: action_project_properties_online__time
+  - rule: project_properties_release__time
+    steps:
+      - intent: project_properties_release__time
+      - action: action_project_properties_release__time
+  - rule: institution_properties_contact__phone
+    steps:
+      - intent: institution_properties_contact__phone
+      - action: action_institution_properties_contact__phone
+  - rule: institution_attribute_nature__of__unit
+    steps:
+      - intent: institution_attribute_nature__of__unit
+      - action: action_institution_attribute_nature__of__unit
+  - rule: organization_attribute_strategic__objective
+    steps:
+      - intent: organization_attribute_strategic__objective
+      - action: action_organization_attribute_strategic__objective
+  - rule: scientific__research__device_properties_introduction
+    steps:
+      - intent: scientific__research__device_properties_introduction
+      - action: action_scientific__research__device_properties_introduction
+  - rule: institution_attributes_mascot
+    steps:
+      - intent: institution_attributes_mascot
+      - action: action_institution_attributes_mascot
+  - rule: institution_properties_introduction
+    steps:
+      - intent: institution_properties_introduction
+      - action: action_institution_properties_introduction
+  - rule: institution_staff_attributes_position
+    steps:
+      - intent: institution_staff_attributes_position
+      - action: action_institution_staff_attributes_position
+  - rule: institution_attributes_values
+    steps:
+      - intent: institution_attributes_values
+      - action: action_institution_attributes_values
+  - rule: institution_attribute_english__name
+    steps:
+      - intent: institution_attribute_english__name
+      - action: action_institution_attribute_english__name
+  - rule: institution_scientific__research__device
+    steps:
+      - intent: institution_scientific__research__device
+      - action: action_institution_scientific__research__device
+  - rule: project_properties_introduction
+    steps:
+      - intent: project_properties_introduction
+      - action: action_project_properties_introduction
+  - rule: institution_attribute_construction__goal
+    steps:
+      - intent: institution_attribute_construction__goal
+      - action: action_institution_attribute_construction__goal
+  - rule: employee_attribute_birthday
+    steps:
+      - intent: employee_attribute_birthday
+      - action: action_employee_attribute_birthday
+  - rule: project_attribute_name
+    steps:
+      - intent: project_attribute_name
+      - action: action_project_attribute_name
+  - rule: employee_attribute_address
+    steps:
+      - intent: employee_attribute_address
+      - action: action_employee_attribute_address
+  - rule: institution_attribute_evaluation
+    steps:
+      - intent: institution_attribute_evaluation
+      - action: action_institution_attribute_evaluation
+  - rule: employee_attribute_office__location
+    steps:
+      - intent: employee_attribute_office__location
+      - action: action_employee_attribute_office__location
+  - rule: institution_attribute_location
+    steps:
+      - intent: institution_attribute_location
+      - action: action_institution_attribute_location
+  - rule: institution_attribute_characteristic__culture
+    steps:
+      - intent: institution_attribute_characteristic__culture
+      - action: action_institution_attribute_characteristic__culture
+  - rule: organization_attribute_mission
+    steps:
+      - intent: organization_attribute_mission
+      - action: action_organization_attribute_mission
+  - rule: institution_attribute_representative__song
+    steps:
+      - intent: institution_attribute_representative__song
+      - action: action_institution_attribute_representative__song
+  - rule: institution_attribute_foundation__time
+    steps:
+      - intent: institution_attribute_foundation__time
+      - action: action_institution_attribute_foundation__time
+  - rule: institution_sub__institution
+    steps:
+      - intent: institution_sub__institution
+      - action: action_institution_sub__institution
+  - rule: position_attribute_term
+    steps:
+      - intent: position_attribute_term
+      - action: action_position_attribute_term
+  - rule: institution_properties_forum
+    steps:
+      - intent: institution_properties_forum
+      - action: action_institution_properties_forum
+  - rule: institution_institution_relationship
+    steps:
+      - intent: institution_institution_relationship
+      - action: action_institution_institution_relationship
+  - rule: institution_outcome
+    steps:
+      - intent: institution_outcome
+      - action: action_institution_outcome
+  - rule: organization_attributes_number__of__people
+    steps:
+      - intent: organization_attributes_number__of__people
+      - action: action_organization_attributes_number__of__people

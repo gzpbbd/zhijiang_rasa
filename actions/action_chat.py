@@ -228,7 +228,7 @@
 #
 # def run():
 #     run_parser = ArgumentParser()
-#     run_parser.add_argument('--gpt2', action='store_true', help="use gpt2")
+#     run_parser.add_argument('--gpt2', qa_action='store_true', help="use gpt2")
 #     run_parser.add_argument("--model_checkpoint", type=str, default="gpt_large",
 #                             help="Path, url or short name of the model")
 #     run_parser.add_argument("--max_history", type=int, default=5,
@@ -236,7 +236,7 @@
 #     run_parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu",
 #                             help="Device (cuda or cpu)")
 #
-#     run_parser.add_argument("--no_sample", action='store_true', help="Set to use greedy decoding instead of sampling")
+#     run_parser.add_argument("--no_sample", qa_action='store_true', help="Set to use greedy decoding instead of sampling")
 #     run_parser.add_argument("--max_length", type=int, default=30, help="Maximum length of the output utterances")
 #     run_parser.add_argument("--min_length", type=int, default=1, help="Minimum length of the output utterances")
 #     run_parser.add_argument("--seed", type=int, default=42, help="Seed")

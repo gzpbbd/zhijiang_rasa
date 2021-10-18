@@ -1,4 +1,3 @@
-1. 先按照一个问答的结构添加NLU，DST, PL, NLG 的数据
     NLU:
         nlu.yml
         domain.yml (intents, entities)
@@ -10,13 +9,20 @@
     NLG:
         actions.py
         domain.yml (responses,actions,forms)
-2. 注意下标注数据过程如何用脚本简化。如何规范化
+1. 写 slot domain
+2. 写 rules. 先按照 固定的 action_xxx 写
+3. 写 action domain.
+4. 写 action.py
 
-3. 把新增的数据放到单独的文件，测试是否能行
+测试 "之江发展基金会有代表歌曲吗" 出现 nlu_fallback
+    1. 单独运行 nlu. 删除多余模型
+    2.
 
+测试用例:
+    智能社会治理研究中心有没有论坛
+    之江发展基金会有代表歌曲吗
 
-
-遇见的问题：
+问题：
     rasa-x修改nlu后，保存回nlu文件的命名实体映射会改变 value 标签的编码
         解决方法：找 unicode 转 中文 的网站转换一下就行了
 
@@ -46,8 +52,10 @@
     rasa run actions
     screen -dr rasa_x
     rasa x -d data
+    rm $(ls | grep db) 删除 db 数据
 
     lsof -i:端口号 查看端口占用语法格式. (list open files)是一个列出当前系统打开文件的工具。
+
 
     亿级神经元类脑计算机是什么
 数据标注格式：
