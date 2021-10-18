@@ -1,0 +1,26 @@
+version: "2.0"
+nlu:
+- intent: achievement_properties_introduction
+  examples: |
+    - [亿级神经元类脑计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}是什么
+    - 你知道[亿级神经元类脑计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}吗
+    - [亿级神经元类脑计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}有什么特点
+    - [神经元类脑计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}是什么
+    - 你知道[类脑计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}吗
+    - [亿级神经元计算机]{"entity": "achievement", "value": "亿级神经元类脑计算机"}有什么特点
+    - [之江天枢人工智能开源平台]{"entity": "achievement", "value": "之江天枢人工智能开源平台"}是什么
+    - 你知道[之江天枢人工智能开源平台]{"entity": "achievement", "value": "之江天枢人工智能开源平台"}吗
+    - [之江天枢人工智能开源平台]{"entity": "achievement", "value": "之江天枢人工智能开源平台"}有什么特点
+    - [先进工业互联网安全平台核心设备](achievement)是什么
+    - 你知道[先进工业互联网安全平台核心设备](achievement)吗
+    - [先进工业互联网安全平台核心设备](achievement)有什么特点
+    - [工业互联网安全平台核心设备]{"entity": "achievement", "value": "先进工业互联网安全平台核心设备"}是什么
+    - 你知道[工业互联网安全核心设备]{"entity": "achievement", "value": "先进工业互联网安全平台核心设备"}吗
+    - [先进工业互联网安全平台设备]{"entity": "achievement", "value": "先进工业互联网安全平台核心设备"}有什么特点
+    - [超大规模电子病历知识图谱](achievement)是什么
+    - 你知道[超大规模电子病历知识图谱](achievement)吗
+    - [超大规模电子病历知识图谱](achievement)有什么特点
+    - [电子病历知识图谱]{"entity": "achievement", "value": "超大规模电子病历知识图谱"}是什么
+    - 你知道[超大规模病历知识图谱]{"entity": "achievement", "value": "超大规模电子病历知识图谱"}吗
+    - [大规模电子病历知识图谱]{"entity": "achievement", "value": "超大规模电子病历知识图谱"}有什么特点
+

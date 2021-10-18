@@ -1,0 +1,16 @@
+version: '2.0'
+intents:
+  - achievement_properties_introduction
+
+entities:
+  - achievement
+slots:
+  achievement:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: nullc
+    auto_fill: true
+    influence_conversation: true
+    values:
+      - 亿级神经元类脑计算机
+actions:
+  - action_achievement_properties_introduction

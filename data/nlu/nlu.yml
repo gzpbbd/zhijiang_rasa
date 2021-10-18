@@ -95,79 +95,79 @@ nlu:
 - intent: choose_top_level
   examples: |
     - [总体布局](top_level)
-    - [总布局]{"entity": "top_level", "value": "\u603b\u4f53\u5e03\u5c40"}
-    - [布局]{"entity": "top_level", "value": "\u603b\u4f53\u5e03\u5c40"}
+    - [总布局]{"entity": "top_level", "value": "总体布局"}
+    - [布局]{"entity": "top_level", "value": "总体布局"}
     - [深海机器人](top_level)
-    - [海机器人]{"entity": "top_level", "value": "\u6df1\u6d77\u673a\u5668\u4eba"}
-    - [深海机器]{"entity": "top_level", "value": "\u6df1\u6d77\u673a\u5668\u4eba"}
-    - [海下机器人]{"entity": "top_level", "value": "\u6df1\u6d77\u673a\u5668\u4eba"}
-    - [海底机器人]{"entity": "top_level", "value": "\u6df1\u6d77\u673a\u5668\u4eba"}
+    - [海机器人]{"entity": "top_level", "value": "深海机器人"}
+    - [深海机器]{"entity": "top_level", "value": "深海机器人"}
+    - [海下机器人]{"entity": "top_level", "value": "深海机器人"}
+    - [海底机器人]{"entity": "top_level", "value": "深海机器人"}
     - [地外探测项目](top_level)
-    - [地外探测]{"entity": "top_level", "value": "\u5730\u5916\u63a2\u6d4b\u9879\u76ee"}
-    - [地外项目]{"entity": "top_level", "value": "\u5730\u5916\u63a2\u6d4b\u9879\u76ee"}
-    - [地外探测机器人]{"entity": "top_level", "value": "\u5730\u5916\u63a2\u6d4b\u9879\u76ee"}
-    - [地外机器人]{"entity": "top_level", "value": "\u5730\u5916\u63a2\u6d4b\u9879\u76ee"}
-    - [太空机器人]{"entity": "top_level", "value": "\u5730\u5916\u63a2\u6d4b\u9879\u76ee"}
+    - [地外探测]{"entity": "top_level", "value": "地外探测项目"}
+    - [地外项目]{"entity": "top_level", "value": "地外探测项目"}
+    - [地外探测机器人]{"entity": "top_level", "value": "地外探测项目"}
+    - [地外机器人]{"entity": "top_level", "value": "地外探测项目"}
+    - [太空机器人]{"entity": "top_level", "value": "地外探测项目"}
     - [智能低空载人飞行器](top_level)
-    - [智能飞行器]{"entity": "top_level", "value": "\u667a\u80fd\u4f4e\u7a7a\u8f7d\u4eba\u98de\u884c\u5668"}
-    - [载人飞行器]{"entity": "top_level", "value": "\u667a\u80fd\u4f4e\u7a7a\u8f7d\u4eba\u98de\u884c\u5668"}
-    - [智能低空载人]{"entity": "top_level", "value": "\u667a\u80fd\u4f4e\u7a7a\u8f7d\u4eba\u98de\u884c\u5668"}
-    - [低空载人]{"entity": "top_level", "value": "\u667a\u80fd\u4f4e\u7a7a\u8f7d\u4eba\u98de\u884c\u5668"}
-    - [载人飞行]{"entity": "top_level", "value": "\u667a\u80fd\u4f4e\u7a7a\u8f7d\u4eba\u98de\u884c\u5668"}
+    - [智能飞行器]{"entity": "top_level", "value": "智能低空载人飞行器"}
+    - [载人飞行器]{"entity": "top_level", "value": "智能低空载人飞行器"}
+    - [智能低空载人]{"entity": "top_level", "value": "智能低空载人飞行器"}
+    - [低空载人]{"entity": "top_level", "value": "智能低空载人飞行器"}
+    - [载人飞行]{"entity": "top_level", "value": "智能低空载人飞行器"}
     - [智能机器人云脑平台](top_level)
-    - [智能云脑平台]{"entity": "top_level", "value": "\u667a\u80fd\u673a\u5668\u4eba\u4e91\u8111\u5e73\u53f0"}
-    - [机器人云脑平台]{"entity": "top_level", "value": "\u667a\u80fd\u673a\u5668\u4eba\u4e91\u8111\u5e73\u53f0"}
-    - [智能机器人云脑]{"entity": "top_level", "value": "\u667a\u80fd\u673a\u5668\u4eba\u4e91\u8111\u5e73\u53f0"}
-    - [机器人云脑]{"entity": "top_level", "value": "\u667a\u80fd\u673a\u5668\u4eba\u4e91\u8111\u5e73\u53f0"}
-    - [云脑平台]{"entity": "top_level", "value": "\u667a\u80fd\u673a\u5668\u4eba\u4e91\u8111\u5e73\u53f0"}
+    - [智能云脑平台]{"entity": "top_level", "value": "智能机器人云脑平台"}
+    - [机器人云脑平台]{"entity": "top_level", "value": "智能机器人云脑平台"}
+    - [智能机器人云脑]{"entity": "top_level", "value": "智能机器人云脑平台"}
+    - [机器人云脑]{"entity": "top_level", "value": "智能机器人云脑平台"}
+    - [云脑平台]{"entity": "top_level", "value": "智能机器人云脑平台"}
     - [高能效服务型双足机器人](top_level)
-    - [高能效双足机器人]{"entity": "top_level", "value": "\u9ad8\u80fd\u6548\u670d\u52a1\u578b\u53cc\u8db3\u673a\u5668\u4eba"}
-    - [服务型双足机器人]{"entity": "top_level", "value": "\u9ad8\u80fd\u6548\u670d\u52a1\u578b\u53cc\u8db3\u673a\u5668\u4eba"}
-    - [高能效服务型]{"entity": "top_level", "value": "\u9ad8\u80fd\u6548\u670d\u52a1\u578b\u53cc\u8db3\u673a\u5668\u4eba"}
-    - [高能效服务]{"entity": "top_level", "value": "\u9ad8\u80fd\u6548\u670d\u52a1\u578b\u53cc\u8db3\u673a\u5668\u4eba"}
-    - [高能效服务型机器人]{"entity": "top_level", "value": "\u9ad8\u80fd\u6548\u670d\u52a1\u578b\u53cc\u8db3\u673a\u5668\u4eba"}
+    - [高能效双足机器人]{"entity": "top_level", "value": "高能效服务型双足机器人"}
+    - [服务型双足机器人]{"entity": "top_level", "value": "高能效服务型双足机器人"}
+    - [高能效服务型]{"entity": "top_level", "value": "高能效服务型双足机器人"}
+    - [高能效服务]{"entity": "top_level", "value": "高能效服务型双足机器人"}
+    - [高能效服务型机器人]{"entity": "top_level", "value": "高能效服务型双足机器人"}
     - [高运动性能双足人形机器人](top_level)
-    - [高运动机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
-    - [高运动双足人形机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
-    - [高运动人形机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
-    - [高运动双足机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
-    - [高运动性能人形机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
-    - [高运动性能人形双足机器人]{"entity": "top_level", "value": "\u9ad8\u8fd0\u52a8\u6027\u80fd\u53cc\u8db3\u4eba\u5f62\u673a\u5668\u4eba"}
+    - [高运动机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
+    - [高运动双足人形机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
+    - [高运动人形机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
+    - [高运动双足机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
+    - [高运动性能人形机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
+    - [高运动性能人形双足机器人]{"entity": "top_level", "value": "高运动性能双足人形机器人"}
 - intent: choose_second_level
   examples: |
     - [主要特点](second_level)
     - [各系列简要介绍](second_level)
-    - [简要介绍]{"entity": "second_level", "value": "\u5404\u7cfb\u5217\u7b80\u8981\u4ecb\u7ecd"}
-    - [各系列介绍]{"entity": "second_level", "value": "\u5404\u7cfb\u5217\u7b80\u8981\u4ecb\u7ecd"}
-    - [系列介绍]{"entity": "second_level", "value": "\u5404\u7cfb\u5217\u7b80\u8981\u4ecb\u7ecd"}
-    - [系列简要介绍]{"entity": "second_level", "value": "\u5404\u7cfb\u5217\u7b80\u8981\u4ecb\u7ecd"}
+    - [简要介绍]{"entity": "second_level", "value": "各系列简要介绍"}
+    - [各系列介绍]{"entity": "second_level", "value": "各系列简要介绍"}
+    - [系列介绍]{"entity": "second_level", "value": "各系列简要介绍"}
+    - [系列简要介绍]{"entity": "second_level", "value": "各系列简要介绍"}
     - [研究进展](second_level)
-    - [进展]{"entity": "second_level", "value": "\u7814\u7a76\u8fdb\u5c55"}
-    - 介绍一下[进展]{"entity": "second_level", "value": "\u7814\u7a76\u8fdb\u5c55"}
-    - [研究的进展]{"entity": "second_level", "value": "\u7814\u7a76\u8fdb\u5c55"}
+    - [进展]{"entity": "second_level", "value": "研究进展"}
+    - 介绍一下[进展]{"entity": "second_level", "value": "研究进展"}
+    - [研究的进展]{"entity": "second_level", "value": "研究进展"}
     - [项目目标](second_level)
     - [目标](second_level)
     - [工程应用](second_level)
-    - [应用]{"entity": "second_level", "value": "\u5de5\u7a0b\u5e94\u7528"}
-    - [特点]{"entity": "second_level", "value": "\u4e3b\u8981\u7279\u70b9"}
+    - [应用]{"entity": "second_level", "value": "工程应用"}
+    - [特点]{"entity": "second_level", "value": "主要特点"}
     - [现实意义](second_level)
-    - [意义]{"entity": "second_level", "value": "\u73b0\u5b9e\u610f\u4e49"}
+    - [意义]{"entity": "second_level", "value": "现实意义"}
     - [定位](second_level)
     - [项目背景](second_level)
-    - [背景]{"entity": "second_level", "value": "\u9879\u76ee\u80cc\u666f"}
+    - [背景]{"entity": "second_level", "value": "项目背景"}
     - [机器人产业核心难题](second_level)
-    - [产业核心难题]{"entity": "second_level", "value": "\u673a\u5668\u4eba\u4ea7\u4e1a\u6838\u5fc3\u96be\u9898"}
-    - [机器人核心难题]{"entity": "second_level", "value": "\u673a\u5668\u4eba\u4ea7\u4e1a\u6838\u5fc3\u96be\u9898"}
-    - [机器人产业难题]{"entity": "second_level", "value": "\u673a\u5668\u4eba\u4ea7\u4e1a\u6838\u5fc3\u96be\u9898"}
+    - [产业核心难题]{"entity": "second_level", "value": "机器人产业核心难题"}
+    - [机器人核心难题]{"entity": "second_level", "value": "机器人产业核心难题"}
+    - [机器人产业难题]{"entity": "second_level", "value": "机器人产业核心难题"}
     - [当前成果](second_level)
-    - [成果]{"entity": "second_level", "value": "\u5f53\u524d\u6210\u679c"}
+    - [成果]{"entity": "second_level", "value": "当前成果"}
     - 介绍一下[成果]吧{"entity":"second_level","value":"当前成果"}
     - [灵感来源](second_level)
-    - [灵感]{"entity": "second_level", "value": "\u7075\u611f\u6765\u6e90"}
+    - [灵感]{"entity": "second_level", "value": "灵感来源"}
     - [团队建设](second_level)
     - [研究重点](second_level)
     - [解决方案](second_level)
-    - [方案]{"entity": "second_level", "value": "\u89e3\u51b3\u65b9\u6848"}
+    - [方案]{"entity": "second_level", "value": "解决方案"}
 - intent: stupid
   examples: |
     - 你真傻

@@ -1,0 +1,77 @@
+1. 先按照一个问答的结构添加NLU，DST, PL, NLG 的数据
+    NLU:
+        nlu.yml
+        domain.yml (intents, entities)
+    DST:
+        domain.yml (slots)
+    PL:
+        rules.yml
+        stories.yml
+    NLG:
+        actions.py
+        domain.yml (responses,actions,forms)
+2. 注意下标注数据过程如何用脚本简化。如何规范化
+
+3. 把新增的数据放到单独的文件，测试是否能行
+
+
+
+遇见的问题：
+    rasa-x修改nlu后，保存回nlu文件的命名实体映射会改变 value 标签的编码
+        解决方法：找 unicode 转 中文 的网站转换一下就行了
+
+    规则如下：使用 rasa train 训练可以成功，在 rasa-x web 界面中点击 train 会出现规则冲突的错误
+      - rule: 到达目的地
+        steps:
+          - intent: have_arrived_target_location
+          - action: action_display_second_list
+      - rule: 到达机器人home位置
+        steps:
+          - intent: have_arrived_target_location
+          - slot_was_set:
+              - target_location: home
+          - action: action_listen
+
+        解决方法：暂无
+
+
+常用命令：
+    cd /code/hcp/github_repo/rasa
+    conda activate rasa_x_0.40.0
+    rasa train -d data
+    rasa train nlu -d data
+    rasa x -d data
+    http://10.12.41.111:5002/
+    screen -dr rasa_action
+    rasa run actions
+    screen -dr rasa_x
+    rasa x -d data
+
+    lsof -i:端口号 查看端口占用语法格式. (list open files)是一个列出当前系统打开文件的工具。
+
+    亿级神经元类脑计算机是什么
+数据标注格式：
+    [总布局]{"entity": "top_level", "value": "总体布局"}
+
+测试：
+    NLU训练100轮：
+    1. 亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机 的实体提取结果
+        亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机
+    2. 之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台 的实体提取结果
+    3. 先进工业互联网安全平台核心设备、工业互联网安全平台核心设备、进工业互联网安全平台核心设备 的实体提取结果
+        全都无法识别
+
+    NLU训练150轮：
+    1. 亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机 的实体提取结果
+        亿级神经元类脑计算机、亿级神经元类脑计算机、经元类脑计算机
+    2. 之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台 的实体提取结果
+        之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台
+    3. 超大规模电子病历知识图谱、电子病历知识图谱、规模电子病历知识图谱 的实体提取结果
+        超大规模电子病历知识图谱、超大规模电子病历知识图谱、规模电子病历知识图谱
+
+    问题：如果一个专有名词少了一个子，也会能识别为对应的实体，但是实体值不能映射到正确的候选值
+        如：规模电子病历知识图谱
+        NLU模型：nlu-20211013-190553.tar.gz
+
+进度：
+    标注NLU数据，写了函数模板（从 organization_attribute_mission 开始，但是没有改变NLU模板）
