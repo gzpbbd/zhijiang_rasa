@@ -1,81 +1,97 @@
 version: "2.0"
 rules:
-  - rule: 员工-属性-生日
+  - rule: 机构-属性-奠基时间
     steps:
-      - intent: employee_attribute_birthday
-      - action: action_employee_attribute_birthday
-  - rule: 机构-属性-论坛
+      - intent: institution_attribute_foundation__time
+      - action: action_institution_attribute_foundation__time
+  - rule: 机构-属性-联系电话
     steps:
-      - intent: institution_properties_forum
-      - action: action_institution_properties_forum
-  - rule: 机构-属性-单位性质
-    steps:
-      - intent: institution_attribute_nature__of__unit
-      - action: action_institution_attribute_nature__of__unit
-  - rule: 机构-属性-价值观
-    steps:
-      - intent: institution_attributes_values
-      - action: action_institution_attributes_values
+      - intent: institution_attribute_contact__phone
+      - action: action_institution_attribute_contact__phone
   - rule: 机构-属性-位置
     steps:
       - intent: institution_attribute_location
       - action: action_institution_attribute_location
+  - rule: 机构-属性-论坛
+    steps:
+      - intent: institution_attribute_forum
+      - action: action_institution_attribute_forum
+  - rule: 项目-属性-发布时间
+    steps:
+      - intent: project_attribute_release__time
+      - action: action_project_attribute_release__time
+  - rule: 机构-属性-吉祥物
+    steps:
+      - intent: institution_attribute_mascot
+      - action: action_institution_attribute_mascot
   - rule: 机构-属性-战略目标
     steps:
-      - intent: organization_attribute_strategic__objective
-      - action: action_organization_attribute_strategic__objective
-  - rule: 机构-科研装置
+      - intent: institution_attribute_strategic__objective
+      - action: action_institution_attribute_strategic__objective
+  - rule: 机构-属性-价值观
     steps:
-      - intent: institution_scientific__research__device
-      - action: action_institution_scientific__research__device
-  - rule: 机构-属性-网址
+      - intent: institution_attribute_values
+      - action: action_institution_attribute_values
+  - rule: 机构-属性-人数
     steps:
-      - intent: institution_properties_url
-      - action: action_institution_properties_url
-  - rule: 项目-属性-名称
+      - intent: institution_attribute_number__of__people
+      - action: action_institution_attribute_number__of__people
+  - rule: 员工-属性-住址
     steps:
-      - intent: project_attribute_name
-      - action: action_project_attribute_name
-  - rule: 职位-属性-任期
+      - intent: employee_attribute_address
+      - action: action_employee_attribute_address
+  - rule: 机构-属性-简介
     steps:
-      - intent: position_attribute_term
-      - action: action_position_attribute_term
-  - rule: 项目-属性-上线时间
+      - intent: institution_attribute_introduction
+      - action: action_institution_attribute_introduction
+  - rule: 机构-属性-建设目标
     steps:
-      - intent: project_properties_online__time
-      - action: action_project_properties_online__time
-  - rule: 机构-项目
+      - intent: institution_attribute_construction__goal
+      - action: action_institution_attribute_construction__goal
+  - rule: nan
     steps:
-      - intent: institution_project
-      - action: action_institution_project
+      - intent: achievement_properties_introduction
+      - action: action_achievement_properties_introduction
+  - rule: nan
+    steps:
+      - intent: institution_outcome
+      - action: action_institution_outcome
+  - rule: 机构-属性-评价
+    steps:
+      - intent: institution_attribute_evaluation
+      - action: action_institution_attribute_evaluation
   - rule: 机构-子机构
     steps:
       - intent: institution_sub__institution
       - action: action_institution_sub__institution
+  - rule: 机构-属性-代表歌曲
+    steps:
+      - intent: institution_attribute_representative__song
+      - action: action_institution_attribute_representative__song
+  - rule: nan
+    steps:
+      - intent: institution_attribute_nature__of__unit
+      - action: action_institution_attribute_nature__of__unit
+  - rule: 项目-属性-名称
+    steps:
+      - intent: project_attribute_name
+      - action: action_project_attribute_name
   - rule: 员工-属性-入职时间
     steps:
       - intent: employee_attribute_on_time
       - action: action_employee_attribute_on_time
-  - rule: 机构-属性-使命
+  - rule: nan
     steps:
-      - intent: organization_attribute_mission
-      - action: action_organization_attribute_mission
-  - rule: 项目-属性-发布时间
+      - intent: institution_scientific__research__device
+      - action: action_institution_scientific__research__device
+  - rule: 项目-属性-上线时间
     steps:
-      - intent: project_properties_release__time
-      - action: action_project_properties_release__time
-  - rule: 机构-属性-简介
+      - intent: project_attribute_online__time
+      - action: action_project_attribute_online__time
+  - rule: 机构-职员-属性-职位
     steps:
-      - intent: institution_properties_introduction
-      - action: action_institution_properties_introduction
-  - rule: 机构-属性-联系电话
-    steps:
-      - intent: institution_properties_contact__phone
-      - action: action_institution_properties_contact__phone
-  - rule: 机构-属性-特色文化
-    steps:
-      - intent: institution_attribute_characteristic__culture
-      - action: action_institution_attribute_characteristic__culture
+      - intent: institution_staff_attribute_position
+      - action: action_institution_staff_attribute_position
   - rule: 机构-机构-关系
     steps:
       - intent: institution_institution_relationship
@@ -84,55 +100,39 @@ rules:
     steps:
       - intent: employee_attribute_office__location
       - action: action_employee_attribute_office__location
-  - rule: 成果-属性-简介
+  - rule: 项目-属性-简介
     steps:
-      - intent: achievement_properties_introduction
-      - action: action_achievement_properties_introduction
-  - rule: 机构-属性-吉祥物
+      - intent: project_attribute_introduction
+      - action: action_project_attribute_introduction
+  - rule: 机构-属性-特色文化
     steps:
-      - intent: institution_attributes_mascot
-      - action: action_institution_attributes_mascot
-  - rule: 机构-属性-英文名
-    steps:
-      - intent: institution_attribute_english__name
-      - action: action_institution_attribute_english__name
-  - rule: 机构-成果，实体名
-    steps:
-      - intent: institution_outcome
-      - action: action_institution_outcome
-  - rule: 机构-属性-奠基时间
-    steps:
-      - intent: institution_attribute_foundation__time
-      - action: action_institution_attribute_foundation__time
-  - rule: 机构-属性-建设目标
-    steps:
-      - intent: institution_attribute_construction__goal
-      - action: action_institution_attribute_construction__goal
-  - rule: 机构-属性-代表歌曲
-    steps:
-      - intent: institution_attribute_representative__song
-      - action: action_institution_attribute_representative__song
-  - rule: 机构-属性-人数
-    steps:
-      - intent: organization_attributes_number__of__people
-      - action: action_organization_attributes_number__of__people
-  - rule: 员工-属性-住址
-    steps:
-      - intent: employee_attribute_address
-      - action: action_employee_attribute_address
+      - intent: institution_attribute_characteristic__culture
+      - action: action_institution_attribute_characteristic__culture
   - rule: 科研装置-属性-简介
     steps:
       - intent: scientific__research__device_properties_introduction
       - action: action_scientific__research__device_properties_introduction
-  - rule: 项目-属性-简介
+  - rule: 员工-属性-生日
     steps:
-      - intent: project_properties_introduction
-      - action: action_project_properties_introduction
-  - rule: 机构-属性-评价
+      - intent: employee_attribute_birthday
+      - action: action_employee_attribute_birthday
+  - rule: 机构-属性-英文名
     steps:
-      - intent: institution_attribute_evaluation
-      - action: action_institution_attribute_evaluation
-  - rule: 机构-职员-属性-职位
+      - intent: institution_attribute_english__name
+      - action: action_institution_attribute_english__name
+  - rule: 职位-属性-任期
     steps:
-      - intent: institution_staff_attributes_position
-      - action: action_institution_staff_attributes_position
+      - intent: position_attribute_term
+      - action: action_position_attribute_term
+  - rule: 机构-属性-网址
+    steps:
+      - intent: institution_attribute_url
+      - action: action_institution_attribute_url
+  - rule: 机构-属性-使命
+    steps:
+      - intent: institution_attribute_mission
+      - action: action_institution_attribute_mission
+  - rule: 机构-项目
+    steps:
+      - intent: institution_project
+      - action: action_institution_project

@@ -9,18 +9,10 @@
     NLG:
         actions.py
         domain.yml (responses,actions,forms)
-1. 写 slot domain
-2. 写 rules. 先按照 固定的 action_xxx 写
-3. 写 action domain.
-4. 写 action.py
 
-测试 "之江发展基金会有代表歌曲吗" 出现 nlu_fallback
-    1. 单独运行 nlu. 删除多余模型
-    2.
-
-测试用例:
-    智能社会治理研究中心有没有论坛
-    之江发展基金会有代表歌曲吗
+目标：写所有的action
+    1. 先写2个action，测试，
+    2. 总结规律，做成模板
 
 问题：
     rasa-x修改nlu后，保存回nlu文件的命名实体映射会改变 value 标签的编码
@@ -44,9 +36,11 @@
 常用命令：
     cd /code/hcp/github_repo/rasa
     conda activate rasa_x_0.40.0
+    export CUDA_VISIBLE_DEVICES=3
     rasa train -d data
-    rasa train nlu -d data
     rasa x -d data
+
+    rasa train nlu -d data
     http://10.12.41.111:5002/
     screen -dr rasa_action
     rasa run actions
@@ -55,13 +49,16 @@
     rm $(ls | grep db) 删除 db 数据
 
     lsof -i:端口号 查看端口占用语法格式. (list open files)是一个列出当前系统打开文件的工具。
+	
+	export http_proxy=http://127.0.0.1:7890 
+	export https_proxy=http://127.0.0.1:7890
 
 
     亿级神经元类脑计算机是什么
 数据标注格式：
     [总布局]{"entity": "top_level", "value": "总体布局"}
 
-测试：
+测试 NLU：
     NLU训练100轮：
     1. 亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机 的实体提取结果
         亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机
@@ -81,5 +78,122 @@
         如：规模电子病历知识图谱
         NLU模型：nlu-20211013-190553.tar.gz
 
+测试 action:
+    action_achievement_properties_introduction,科研成果.csv,成果名称,简介
+        亿级神经元类脑计算机是什么 ok
+    action_employee_attribute_birthday,人.csv,姓名,生日
+        宋伟的生日是什么时候 ok
+    action_employee_attribute_office__location,人.csv,姓名,办公地点
+        顾建军老师的办公室在哪里 ok
+    action_employee_attribute_on_time,人.csv,姓名,入职时间
+        宋伟是什么时候入职的 ok
+    action_institution_attribute_characteristic__culture,机构（属性信息）.csv,机构名|别称,特色文化
+        之江实验室的特色文化是什么 ok
+    action_institution_attribute_construction__goal,机构（属性信息）.csv,机构名|别称,建设目标
+        之江实验室的建设目标是什么 ok
+    action_institution_attribute_english__name,机构（属性信息）.csv,机构名|别称,英文名
+        之江实验室的英文名称是什么 ok
+    action_institution_attribute_evaluation,机构（属性信息）.csv,机构名|别称,评价
+        之江实验室怎么样 ok
+    action_institution_attribute_foundation__time,机构（属性信息）.csv,机构名|别称,奠基时间
+        之江实验室的奠基时间是什么 ok
+    action_institution_attribute_location,机构（属性信息）.csv,机构名|别称,位置
+        之江实验室在哪里 ok
+    action_institution_attribute_mascot,机构（属性信息）.csv,机构名|别称,吉祥物
+        之江实验室的吉祥物是什么 ok
+    action_institution_attribute_nature__of__unit,机构（属性信息）.csv,机构名|别称,单位性质
+        之江实验室的单位性质是什么 ok
+    action_institution_attribute_representative__song,机构（属性信息）.csv,机构名|别称,代表歌曲
+        之江实验室的室歌是什么 ok
+    action_institution_attribute_values,机构（属性信息）.csv,机构名|别称,价值观
+        之江实验室的价值观是什么 ok
+    action_institution_attribute_contact__phone,机构（属性信息）.csv,机构名|别称,联系电话
+        之江实验室的电话是多少 ok
+    action_institution_attribute_forum,机构（属性信息）.csv,机构名|别称,论坛
+        之江实验室有没有论坛 ok
+    action_institution_attribute_url,机构（属性信息）.csv,机构名|别称,网址
+        之江实验室的官网是什么 ok
+    action_institution_attribute_mission,机构（属性信息）.csv,机构名|别称,使命
+        之江实验室的使命是什么 ok
+    action_institution_attribute_strategic__objective,机构（属性信息）.csv,机构名|别称,战略目标
+        之江实验室的战略目标是什么 ok
+    action_project_attribute_introduction,项目.csv,名称,简介
+        可以介绍一下之江天枢人工智能开源平台吗 ok
+    action_project_attribute_online__time,项目.csv,名称,上线时间
+        之江天枢人工智能开源平台全面上线时间是什么时候 ok
+    action_project_attribute_release__time,项目.csv,名称,发布时间
+        之江天枢人工智能开源平台的发布时间是什么时候 ok
+    action_scientific__research__device_properties_introduction,科研装置.csv,名称,简介
+        可以介绍一下软件代码大数据与代码知识网络科学装置吗 ok
+
+
+    action_institution_attribute_introduction,机构（属性信息）.csv,机构名|别称,简介
+        之江实验室是做什么的 no nlu_fallback{"institution":"之江实验室"}(0.50)
+    action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
+        之江实验室一共有多少人 no action 出现错误 AttributeError: 'int' object has no attribute 'strip'
+    action_position_attribute_term,职位+智能.csv,职位,任期
+        之江实验室主任的任期是多久 no 需要特殊处理
+
 进度：
-    标注NLU数据，写了函数模板（从 organization_attribute_mission 开始，但是没有改变NLU模板）
+    标注NLU数据，写了函数模板（从 institution_attribute_mission 开始，但是没有改变NLU模板）
+
+
+
+  - action_achievement_properties_introduction,科研成果.csv,成果名称,简介
+  - action_employee_attribute_birthday,人.csv,姓名,生日
+  - action_employee_attribute_office__location,人.csv,姓名,办公地点
+  - action_employee_attribute_on_time,人.csv,姓名,入职时间
+  - action_institution_attribute_characteristic__culture,机构（属性信息）.csv,机构名|别称,特色文化
+  - action_institution_attribute_construction__goal,机构（属性信息）.csv,机构名|别称,建设目标
+  - action_institution_attribute_english__name,机构（属性信息）.csv,机构名|别称,英文名
+  - action_institution_attribute_evaluation,机构（属性信息）.csv,机构名|别称,评价
+  - action_institution_attribute_foundation__time,机构（属性信息）.csv,机构名|别称,奠基时间
+  - action_institution_attribute_location,机构（属性信息）.csv,机构名|别称,位置
+  - action_institution_attribute_mascot,机构（属性信息）.csv,机构名|别称,吉祥物
+  - action_institution_attribute_nature__of__unit,机构（属性信息）.csv,机构名|别称,单位性质
+  - action_institution_attribute_representative__song,机构（属性信息）.csv,机构名|别称,代表歌曲
+  - action_institution_attribute_values,机构（属性信息）.csv,机构名|别称,价值观
+  - action_institution_attribute_contact__phone,机构（属性信息）.csv,机构名|别称,联系电话
+  - action_institution_attribute_forum,机构（属性信息）.csv,机构名|别称,论坛
+  - action_institution_attribute_introduction,机构（属性信息）.csv,机构名|别称,简介
+  - action_institution_attribute_url,机构（属性信息）.csv,机构名|别称,网址
+  - action_institution_attribute_mission,机构（属性信息）.csv,机构名|别称,使命
+  - action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
+  - action_institution_attribute_strategic__objective,机构（属性信息）.csv,机构名|别称,战略目标
+  - action_institution_staff_attribute_position,-----根据 机构-职位 查找人
+  - action_position_attribute_term,职位+智能.csv,职位,任期
+  - action_project_attribute_introduction,项目.csv,名称,简介
+  - action_project_attribute_online__time,项目.csv,名称,上线时间
+  - action_project_attribute_release__time,项目.csv,名称,发布时间
+  - action_scientific__research__device_properties_introduction,科研装置.csv,名称,简介
+
+
+  - action_institution_sub__institution,------------特殊处理
+  - action_institution_institution_relationship,-----------特殊处理
+
+  - action_institution_outcome,--------------硬处理
+  - action_institution_project,----------------硬处理
+  - action_institution_scientific__research__device,---------------硬处理
+
+  - action_employee_attribute_address,------------人.csv,姓名,x-------没有对应的表
+  - action_project_attribute_name,---------------没有对应的表
+
+
+
+
+
+  ---------------------
+
+
+
+action_institution_staff_attribute_position,-----根据 机构-职位 查找人
+
+action_institution_sub__institution,------------特殊处理
+action_institution_institution_relationship,-----------特殊处理
+
+action_institution_outcome,--------------硬处理
+action_institution_project,----------------硬处理
+action_institution_scientific__research__device,---------------硬处理
+
+action_employee_attribute_address,------------人.csv,姓名,x-------没有对应的表
+action_project_attribute_name,---------------没有对应的表

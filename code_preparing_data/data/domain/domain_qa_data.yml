@@ -1,0 +1,94 @@
+version: "2.0"
+intents:
+  - achievement_properties_introduction
+  - employee_attribute_address
+  - employee_attribute_birthday
+  - employee_attribute_office__location
+  - employee_attribute_on_time
+  - institution_attribute_characteristic__culture
+  - institution_attribute_construction__goal
+  - institution_attribute_contact__phone
+  - institution_attribute_english__name
+  - institution_attribute_evaluation
+  - institution_attribute_forum
+  - institution_attribute_foundation__time
+  - institution_attribute_introduction
+  - institution_attribute_location
+  - institution_attribute_mascot
+  - institution_attribute_mission
+  - institution_attribute_nature__of__unit
+  - institution_attribute_number__of__people
+  - institution_attribute_representative__song
+  - institution_attribute_strategic__objective
+  - institution_attribute_url
+  - institution_attribute_values
+  - institution_institution_relationship
+  - institution_outcome
+  - institution_project
+  - institution_scientific__research__device
+  - institution_staff_attribute_position
+  - institution_sub__institution
+  - position_attribute_term
+  - project_attribute_introduction
+  - project_attribute_name
+  - project_attribute_online__time
+  - project_attribute_release__time
+  - scientific__research__device_properties_introduction
+
+entities:
+  - position
+  - project
+  - achievement
+  - institution
+  - employee
+  - scientific__research__device
+
+slots:
+  position:
+    type: text
+  project:
+    type: text
+  achievement:
+    type: text
+  institution:
+    type: text
+  employee:
+    type: text
+  scientific__research__device:
+    type: text
+
+actions:
+  - action_achievement_properties_introduction
+  - action_employee_attribute_address
+  - action_employee_attribute_birthday
+  - action_employee_attribute_office__location
+  - action_employee_attribute_on_time
+  - action_institution_attribute_characteristic__culture
+  - action_institution_attribute_construction__goal
+  - action_institution_attribute_contact__phone
+  - action_institution_attribute_english__name
+  - action_institution_attribute_evaluation
+  - action_institution_attribute_forum
+  - action_institution_attribute_foundation__time
+  - action_institution_attribute_introduction
+  - action_institution_attribute_location
+  - action_institution_attribute_mascot
+  - action_institution_attribute_mission
+  - action_institution_attribute_nature__of__unit
+  - action_institution_attribute_number__of__people
+  - action_institution_attribute_representative__song
+  - action_institution_attribute_strategic__objective
+  - action_institution_attribute_url
+  - action_institution_attribute_values
+  - action_institution_institution_relationship
+  - action_institution_outcome
+  - action_institution_project
+  - action_institution_scientific__research__device
+  - action_institution_staff_attribute_position
+  - action_institution_sub__institution
+  - action_position_attribute_term
+  - action_project_attribute_introduction
+  - action_project_attribute_name
+  - action_project_attribute_online__time
+  - action_project_attribute_release__time
+  - action_scientific__research__device_properties_introduction
