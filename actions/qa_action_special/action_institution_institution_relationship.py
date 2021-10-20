@@ -7,15 +7,17 @@ from rasa_sdk.events import SlotSet, AllSlotsReset, BotUttered
 from actions.qa_action.utils import inquiry_key_value
 
 
-class ActionInstitutionAttributeStrategicObjective(Action):
+class ActionInstitutionInstitutionRelationship(Action):
     def __init__(self):
-        self.db_file = "actions/qa_database/机构（属性信息）.csv"
-        self.key_column = "机构名|别称"
-        self.value_column = "战略目标"
-        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
+        self.db_file = "actions/qa_database/"
+        self.key_column = ""
+        self.value_column = ""
+
+        # 读取表 机构（多级机构及职员信息）.csv，建立(1,2,子机构)
+        # 读取表 机构间关系.csv，建立(之江，2，两位一体)
 
     def name(self) -> Text:
-        return "action_institution_attribute_strategic__objective"
+        return "action_institution_institution_relationship"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,

@@ -16,7 +16,10 @@ from actions.qa_action.utils import inquiry_key_value
 
 class %s(Action):
     def __init__(self):
-        self.dic = inquiry_key_value("actions/qa_database/%s", "%s", "%s")
+        self.db_file = "actions/qa_database/%s"
+        self.key_column = "%s"
+        self.value_column = "%s"
+        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
 
     def name(self) -> Text:
         return "%s"
@@ -29,13 +32,15 @@ class %s(Action):
 
         # 查询数据库，得到话语
         if slot_value not in self.dic.keys():
-            utterance = '\\"{}\\" 没在数据库中。可能的值为: \\n\\n'.format(slot_value)
+            utterance = '\"{}\" 没在数据文件\"{}[column:{}]\"中。可能的值为: \\n\\n'.format(slot_value,
+                                                                         self.db_file,
+                                                                         self.key_column)
             for x in self.dic.keys():
                 utterance += '- ' + x + '\\n'
         else:
             utterance = self.dic[slot_value]
 
-        dispatcher.utter_message(text=utterance)
+        dispatcher.utter_message(text=str(utterance))
         return []
 """
 

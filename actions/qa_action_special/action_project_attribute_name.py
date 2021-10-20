@@ -7,21 +7,21 @@ from rasa_sdk.events import SlotSet, AllSlotsReset, BotUttered
 from actions.qa_action.utils import inquiry_key_value
 
 
-class ActionInstitutionAttributeStrategicObjective(Action):
+class ActionProjectAttributeName(Action):
     def __init__(self):
-        self.db_file = "actions/qa_database/机构（属性信息）.csv"
-        self.key_column = "机构名|别称"
-        self.value_column = "战略目标"
+        self.db_file = "actions/qa_database/"
+        self.key_column = ""
+        self.value_column = ""
         self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
 
     def name(self) -> Text:
-        return "action_institution_attribute_strategic__objective"
+        return "action_project_attribute_name"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # 获取意图和槽位信息
-        slot_value = tracker.get_slot('institution')
+        slot_value = tracker.get_slot('project')
 
         # 查询数据库，得到话语
         if slot_value not in self.dic.keys():

@@ -20,7 +20,7 @@ action_institution_attribute_url,机构（属性信息）.csv,机构名|别称,�
 action_institution_attribute_mission,机构（属性信息）.csv,机构名|别称,使命
 action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
 action_institution_attribute_strategic__objective,机构（属性信息）.csv,机构名|别称,战略目标
-action_position_attribute_term,职位+智能.csv,职位,任期
+action_position_attribute_term,职位+职能.csv,职位,任期
 action_project_attribute_introduction,项目.csv,名称,简介
 action_project_attribute_online__time,项目.csv,名称,上线时间
 action_project_attribute_release__time,项目.csv,名称,发布时间

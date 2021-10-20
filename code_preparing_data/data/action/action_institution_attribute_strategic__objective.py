@@ -9,7 +9,10 @@ from actions.qa_action.utils import inquiry_key_value
 
 class ActionInstitutionAttributeStrategicObjective(Action):
     def __init__(self):
-        self.dic = inquiry_key_value("actions/qa_database/机构（属性信息）.csv", "机构名|别称", "战略目标")
+        self.db_file = "actions/qa_database/机构（属性信息）.csv"
+        self.key_column = "机构名|别称"
+        self.value_column = "战略目标"
+        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
 
     def name(self) -> Text:
         return "action_institution_attribute_strategic__objective"
@@ -22,11 +25,13 @@ class ActionInstitutionAttributeStrategicObjective(Action):
 
         # 查询数据库，得到话语
         if slot_value not in self.dic.keys():
-            utterance = '\"{}\" 没在数据库中。可能的值为: \n\n'.format(slot_value)
+            utterance = '"{}" 没在数据文件"{}[column:{}]"中。可能的值为: \n\n'.format(slot_value,
+                                                                         self.db_file,
+                                                                         self.key_column)
             for x in self.dic.keys():
                 utterance += '- ' + x + '\n'
         else:
             utterance = self.dic[slot_value]
 
-        dispatcher.utter_message(text=utterance)
+        dispatcher.utter_message(text=str(utterance))
         return []

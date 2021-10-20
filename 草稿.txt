@@ -125,14 +125,27 @@
         之江天枢人工智能开源平台的发布时间是什么时候 ok
     action_scientific__research__device_properties_introduction,科研装置.csv,名称,简介
         可以介绍一下软件代码大数据与代码知识网络科学装置吗 ok
+    action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
+        之江实验室一共有多少人 ok
+    action_position_attribute_term,职位+职能.csv,职位,任期
+        之江实验室主任的任期是多久 ok
 
 
     action_institution_attribute_introduction,机构（属性信息）.csv,机构名|别称,简介
         之江实验室是做什么的 no nlu_fallback{"institution":"之江实验室"}(0.50)
-    action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
-        之江实验室一共有多少人 no action 出现错误 AttributeError: 'int' object has no attribute 'strip'
-    action_position_attribute_term,职位+智能.csv,职位,任期
-        之江实验室主任的任期是多久 no 需要特殊处理
+
+
+
+    action_institution_sub__institution,------------特殊处理
+        小之的家在哪里 ok
+    action_institution_institution_relationship,-----------特殊处理
+
+    action_institution_outcome,--------------硬处理
+    action_institution_project,----------------硬处理
+    action_institution_scientific__research__device,---------------硬处理
+
+    action_employee_attribute_address,------------人.csv,姓名,x-------没有对应的表
+    action_project_attribute_name,---------------没有对应的表
 
 进度：
     标注NLU数据，写了函数模板（从 institution_attribute_mission 开始，但是没有改变NLU模板）
@@ -161,7 +174,7 @@
   - action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
   - action_institution_attribute_strategic__objective,机构（属性信息）.csv,机构名|别称,战略目标
   - action_institution_staff_attribute_position,-----根据 机构-职位 查找人
-  - action_position_attribute_term,职位+智能.csv,职位,任期
+  - action_position_attribute_term,职位+职能.csv,职位,任期
   - action_project_attribute_introduction,项目.csv,名称,简介
   - action_project_attribute_online__time,项目.csv,名称,上线时间
   - action_project_attribute_release__time,项目.csv,名称,发布时间
@@ -169,6 +182,7 @@
 
 
   - action_institution_sub__institution,------------特殊处理
+    小之的家在哪里 ok
   - action_institution_institution_relationship,-----------特殊处理
 
   - action_institution_outcome,--------------硬处理

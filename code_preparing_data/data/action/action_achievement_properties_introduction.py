@@ -9,7 +9,10 @@ from actions.qa_action.utils import inquiry_key_value
 
 class ActionAchievementPropertiesIntroduction(Action):
     def __init__(self):
-        self.dic = inquiry_key_value("actions/qa_database/科研成果.csv", "成果名称", "简介")
+        self.db_file = "actions/qa_database/科研成果.csv"
+        self.key_column = "成果名称"
+        self.value_column = "简介"
+        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
 
     def name(self) -> Text:
         return "action_achievement_properties_introduction"
@@ -22,11 +25,13 @@ class ActionAchievementPropertiesIntroduction(Action):
 
         # 查询数据库，得到话语
         if slot_value not in self.dic.keys():
-            utterance = '\"{}\" 没在数据库中。可能的值为: \n\n'.format(slot_value)
+            utterance = '"{}" 没在数据文件"{}[column:{}]"中。可能的值为: \n\n'.format(slot_value,
+                                                                         self.db_file,
+                                                                         self.key_column)
             for x in self.dic.keys():
                 utterance += '- ' + x + '\n'
         else:
             utterance = self.dic[slot_value]
 
-        dispatcher.utter_message(text=utterance)
+        dispatcher.utter_message(text=str(utterance))
         return []

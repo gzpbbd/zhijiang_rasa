@@ -52,6 +52,8 @@ def inquiry_institution_attribute(filepath, key_col, value_col):
     return dic
 
 
+
+
 if __name__ == '__main__':
     filename = "../qa_database/人.csv"
     key_name = '姓名'

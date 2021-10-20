@@ -889,7 +889,7 @@ def employee_attribute_address(verbose=0):
 # 职位-属性-任期,position_attribute_term，实体：职位
 def position_attribute_term(verbose=0):
     # 读取实体的可能值
-    df = pandas.read_csv('data/qa_database/职位+智能.csv', sep='\t')
+    df = pandas.read_csv('data/qa_database/职位+职能.csv', sep='\t')
     values = list(df['职位'])
     values = set(values)
     values_position = [x for x in values if isinstance(x, str)]  # 移除 nan 元素
