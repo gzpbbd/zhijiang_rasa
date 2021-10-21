@@ -1,4 +1,6 @@
 import os
+
+import pandas
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -9,10 +11,8 @@ from actions.qa_action.utils import inquiry_key_value
 
 class ActionInstitutionOutcome(Action):
     def __init__(self):
-        self.db_file = "actions/qa_database/"
-        self.key_column = ""
-        self.value_column = ""
-        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
+        self.db_file = "actions/qa_database/科研成果.csv"
+        self.outcomes = list(pandas.read_csv(self.db_file, sep='\t')['成果名称'])
 
     def name(self) -> Text:
         return "action_institution_outcome"
@@ -22,16 +22,10 @@ class ActionInstitutionOutcome(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # 获取意图和槽位信息
         slot_value = tracker.get_slot('institution')
-
-        # 查询数据库，得到话语
-        if slot_value not in self.dic.keys():
-            utterance = '"{}" 没在数据文件"{}[column:{}]"中。可能的值为: \n\n'.format(slot_value,
-                                                                         self.db_file,
-                                                                         self.key_column)
-            for x in self.dic.keys():
-                utterance += '- ' + x + '\n'
+        if slot_value == '之江实验室' or slot_value == '智能机器人研究中心':
+            utterance = '、'.join(self.outcomes)
         else:
-            utterance = self.dic[slot_value]
+            utterance = '我只知道之江实验室和智能机器人研究中心有哪些成果呢'
 
         dispatcher.utter_message(text=str(utterance))
         return []

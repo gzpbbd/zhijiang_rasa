@@ -12,7 +12,6 @@ class ActionProjectAttributeName(Action):
         self.db_file = "actions/qa_database/"
         self.key_column = ""
         self.value_column = ""
-        self.dic = inquiry_key_value(self.db_file, self.key_column, self.value_column)
 
     def name(self) -> Text:
         return "action_project_attribute_name"
@@ -23,15 +22,5 @@ class ActionProjectAttributeName(Action):
         # 获取意图和槽位信息
         slot_value = tracker.get_slot('project')
 
-        # 查询数据库，得到话语
-        if slot_value not in self.dic.keys():
-            utterance = '"{}" 没在数据文件"{}[column:{}]"中。可能的值为: \n\n'.format(slot_value,
-                                                                         self.db_file,
-                                                                         self.key_column)
-            for x in self.dic.keys():
-                utterance += '- ' + x + '\n'
-        else:
-            utterance = self.dic[slot_value]
-
-        dispatcher.utter_message(text=str(utterance))
+        dispatcher.utter_message(text="不晓得，没有保存了项目别名的数据表[employee:{}]".format(slot_value))
         return []
