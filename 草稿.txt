@@ -1,0 +1,154 @@
+    NLU:
+        nlu.yml
+        domain.yml (intents, entities)
+    DST:
+        domain.yml (slots)
+    PL:
+        rules.yml
+        stories.yml
+    NLG:
+        actions.py
+        domain.yml (responses,actions,forms)
+
+目标：写所有的action
+    1. 先写2个action，测试，
+    2. 总结规律，做成模板
+
+问题：
+    rasa-x修改nlu后，保存回nlu文件的命名实体映射会改变 value 标签的编码
+        解决方法：找 unicode 转 中文 的网站转换一下就行了
+
+    规则如下：使用 rasa train 训练可以成功，在 rasa-x web 界面中点击 train 会出现规则冲突的错误
+      - rule: 到达目的地
+        steps:
+          - intent: have_arrived_target_location
+          - action: action_display_second_list
+      - rule: 到达机器人home位置
+        steps:
+          - intent: have_arrived_target_location
+          - slot_was_set:
+              - target_location: home
+          - action: action_listen
+
+        解决方法：暂无
+
+
+常用命令：
+    cd /code/hcp/github_repo/rasa
+    conda activate rasa_x_0.40.0
+    rasa run actions
+    export CUDA_VISIBLE_DEVICES=3
+    rasa train -d data
+    rasa x -d data
+
+    rasa train nlu -d data
+    http://10.12.41.111:5002/
+    screen -dr rasa_action
+    screen -dr rasa_x
+    rasa x -d data
+    rm $(ls | grep db) 删除 db 数据
+
+    lsof -i:端口号 查看端口占用语法格式. (list open files)是一个列出当前系统打开文件的工具。
+	
+	export http_proxy=http://127.0.0.1:7890 
+	export https_proxy=http://127.0.0.1:7890
+
+	conda activate bert
+	bert-serving-start -model_dir  /code/hcp/download/chinese_L-12_H-768_A-12
+
+
+    亿级神经元类脑计算机是什么
+
+数据标注格式：
+    [总布局]{"entity": "top_level", "value": "总体布局"}
+
+测试 NLU：
+    NLU训练100轮：
+    1. 亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机 的实体提取结果
+        亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机
+    2. 之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台 的实体提取结果
+    3. 先进工业互联网安全平台核心设备、工业互联网安全平台核心设备、进工业互联网安全平台核心设备 的实体提取结果
+        全都无法识别
+
+    NLU训练150轮：
+    1. 亿级神经元类脑计算机、神经元类脑计算机、经元类脑计算机 的实体提取结果
+        亿级神经元类脑计算机、亿级神经元类脑计算机、经元类脑计算机
+    2. 之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台 的实体提取结果
+        之江天枢人工智能开源平台、天枢人工智能开源平台、之江人工智能开源平台
+    3. 超大规模电子病历知识图谱、电子病历知识图谱、规模电子病历知识图谱 的实体提取结果
+        超大规模电子病历知识图谱、超大规模电子病历知识图谱、规模电子病历知识图谱
+
+    问题：如果一个专有名词少了一个子，也会能识别为对应的实体，但是实体值不能映射到正确的候选值
+        如：规模电子病历知识图谱
+        NLU模型：nlu-20211013-190553.tar.gz
+
+测试 action:
+    action_achievement_properties_introduction,科研成果.csv,成果名称,简介
+        亿级神经元类脑计算机是什么 ok
+    action_employee_attribute_birthday,人.csv,姓名,生日
+        宋伟的生日是什么时候 ok
+    action_employee_attribute_office__location,人.csv,姓名,办公地点
+        顾建军老师的办公室在哪里 ok
+    action_employee_attribute_on_time,人.csv,姓名,入职时间
+        宋伟是什么时候入职的 ok
+    action_institution_attribute_characteristic__culture,机构（属性信息）.csv,机构名|别称,特色文化
+        之江实验室的特色文化是什么 ok
+    action_institution_attribute_construction__goal,机构（属性信息）.csv,机构名|别称,建设目标
+        之江实验室的建设目标是什么 ok
+    action_institution_attribute_english__name,机构（属性信息）.csv,机构名|别称,英文名
+        之江实验室的英文名称是什么 ok
+    action_institution_attribute_evaluation,机构（属性信息）.csv,机构名|别称,评价
+        之江实验室怎么样 ok
+    action_institution_attribute_foundation__time,机构（属性信息）.csv,机构名|别称,奠基时间
+        之江实验室的奠基时间是什么 ok
+    action_institution_attribute_location,机构（属性信息）.csv,机构名|别称,位置
+        之江实验室在哪里 ok
+    action_institution_attribute_mascot,机构（属性信息）.csv,机构名|别称,吉祥物
+        之江实验室的吉祥物是什么 ok
+    action_institution_attribute_nature__of__unit,机构（属性信息）.csv,机构名|别称,单位性质
+        之江实验室的单位性质是什么 ok
+    action_institution_attribute_representative__song,机构（属性信息）.csv,机构名|别称,代表歌曲
+        之江实验室的室歌是什么 ok
+    action_institution_attribute_values,机构（属性信息）.csv,机构名|别称,价值观
+        之江实验室的价值观是什么 ok
+    action_institution_attribute_contact__phone,机构（属性信息）.csv,机构名|别称,联系电话
+        之江实验室的电话是多少 ok
+    action_institution_attribute_forum,机构（属性信息）.csv,机构名|别称,论坛
+        之江实验室有没有论坛 ok
+    action_institution_attribute_url,机构（属性信息）.csv,机构名|别称,网址
+        之江实验室的官网是什么 ok
+    action_institution_attribute_mission,机构（属性信息）.csv,机构名|别称,使命
+        之江实验室的使命是什么 ok
+    action_institution_attribute_strategic__objective,机构（属性信息）.csv,机构名|别称,战略目标
+        之江实验室的战略目标是什么 ok
+    action_project_attribute_introduction,项目.csv,名称,简介
+        可以介绍一下之江天枢人工智能开源平台吗 ok
+    action_project_attribute_online__time,项目.csv,名称,上线时间
+        之江天枢人工智能开源平台全面上线时间是什么时候 ok
+    action_project_attribute_release__time,项目.csv,名称,发布时间
+        之江天枢人工智能开源平台的发布时间是什么时候 ok
+    action_scientific__research__device_properties_introduction,科研装置.csv,名称,简介
+        可以介绍一下软件代码大数据与代码知识网络科学装置吗 ok
+    action_institution_attribute_number__of__people,机构（属性信息）.csv,机构名|别称,人数
+        之江实验室一共有多少人 ok
+    action_position_attribute_term,职位+职能.csv,职位,任期
+        之江实验室主任的任期是多久 ok
+
+    action_institution_sub__institution,------------特殊处理
+        智能计算研究院有哪些子机构 ok
+    action_institution_institution_relationship,-----------特殊处理
+        之江实验室和阿里巴巴是什么关系 ok
+    action_institution_outcome,--------------硬处理
+        智能机器人研究中心有什么科研成果 ok
+    action_institution_project,----------------硬处理
+        之江实验室有哪些科研项目 ok
+    action_institution_scientific__research__device,---------------硬处理
+        之江实验室有哪些科研装置 ok
+    action_employee_attribute_address,------------人.csv,姓名,x-------没有对应的表
+        小之的家在哪里
+    action_project_attribute_name,---------------没有对应的表
+        之江实验室的人工智能开源平台叫什么
+
+
+    action_institution_attribute_introduction,机构（属性信息）.csv,机构名|别称,简介
+        之江实验室是做什么的 no nlu_fallback{"institution":"之江实验室"}(0.50)

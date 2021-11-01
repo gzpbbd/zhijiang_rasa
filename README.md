@@ -11,14 +11,14 @@
     data/domain: 所有的 domain 文件
     code_preparing_data：有关自动标注数据的 python 程序
 
-# 基于表格"问答分类及标注-20210923-xxm.xlsx"新增的标注文件为：
+# 基于表格"问答数据-20211008.xlsx"新增的标注文件为：
     data/nlu/nlu_qa_data.yml
     data/core/rules_qa_data.yml
     data/domain/domain_qa_data.yml
     
     actions/qa_action/* 一些比较规律的 action
     actions/qa_action_special/* 需要特殊处理的 action
-    actions/qa_database/* 根据表格"问答分类及标注-20210923-xxm.xlsx"抽取出的 csv 文件，作为数据库，供 action 查询数据。
+    actions/qa_database/* 根据表格"问答数据-20211008.xlsx"抽取出的 csv 文件，作为数据库，供 action 查询数据。
 
 # code_preparing_data 文件夹说明（只是用于自动标注数据，可以不看）
     code_preparing_data/action_process_single_column_inquiry.py: 编写 action 的 python 程序 
