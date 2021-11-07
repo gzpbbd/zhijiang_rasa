@@ -39,14 +39,18 @@ class IntentModel(IntentModelInterface):
         self.idx2intent = None
         self.intent2idx = None
         self.net = None
-        self.bert_client = BertClient()
+        print("... connecting to the Bert server")
+        self.bert_client = BertClient(timeout=60000)
+        print("... successfully connected to the Bert server")
 
     def train(self, texts: List[str], labels: List[str], intents: Set[str], epochs: int):
         self.idx2intent = dict((i, intent) for i, intent in enumerate(intents))
         self.intent2idx = dict((intent, i) for i, intent in enumerate(intents))
 
         # X
+        print("using Bert to extract features")
         texts_np = self.bert_client.encode(texts)
+        print("using Bert to extract features done")
         # Y
         labels_np = np.array([self.intent2idx[label] for label in labels])
         # 洗牌
@@ -102,7 +106,8 @@ class IntentModel(IntentModelInterface):
 
     def process(self, text: str):
         texts_np = self.bert_client.encode([text])
-        input_data = torch.tensor(texts_np)
+        # input_data = torch.tensor(texts_np)
+        input_data = torch.tensor(np.array(texts_np))
         pred = self.net.predict(input_data)
         pred = torch.squeeze(pred, dim=0).tolist()
 
