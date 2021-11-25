@@ -5,18 +5,30 @@ from rasa.nlu.components import Component
 from rasa.nlu.config import RasaNLUModelConfig
 from rasa.shared.nlu.training_data.training_data import TrainingData
 from rasa.shared.nlu.training_data.message import Message
-from rasa.shared.nlu.constants import INTENT, TEXT
+# from rasa.shared.nlu.constants import INTENT, TEXT
 from rasa.nlu.classifiers.classifier import IntentClassifier
 from rasa.utils.train_utils import override_defaults
 import os
 from bert_serving.client import BertClient
-from component.intent_classifier_model import IntentModel
+
+from component.entity_extractor_model import EntityExtractorModel
+from component.intent_model import IntentModel
+
+from rasa.nlu.extractors.extractor import EntityExtractor
 
 if typing.TYPE_CHECKING:
     from rasa.nlu.model import Metadata
+from rasa.shared.nlu.constants import (
+    ENTITIES,
+    ENTITY_ATTRIBUTE_VALUE,
+    ENTITY_ATTRIBUTE_START,
+    ENTITY_ATTRIBUTE_END,
+    TEXT,
+    ENTITY_ATTRIBUTE_TYPE,
+)
 
 
-class MyIntentClassifier(IntentClassifier):
+class MyEntityExtractor(EntityExtractor):
     # class MyIntentClassifier(Component):
     """A new component"""
 
@@ -59,8 +71,8 @@ class MyIntentClassifier(IntentClassifier):
 
         self.model = model
         if not self.model:
-            self.model = IntentModel()
-        print('---- MyIntentClassifier init')
+            self.model = EntityExtractorModel(self.component_config)
+        print('---- MyEntityExtractor init')
 
     def train(
             self,
@@ -88,17 +100,16 @@ class MyIntentClassifier(IntentClassifier):
 
         :param component_config: 在配置文件中的键值对
         """
-        print('---- MyIntentClassifier train')
-        intents = training_data.intents  # 所有的意图
+        print('---- MyEntityExtractor train')
+        entity_set = training_data.entities  # 标签的集合
         # 训练数据
         texts = []
-        labels = []
-        for ex in training_data.intent_examples:
+        entities = []
+        for ex in training_data.entity_examples:
             texts.append(ex.get(TEXT))
-            labels.append(ex.get(INTENT))
+            entities.append(ex.get(ENTITIES))
 
-        print("training {} epochs".format(self.component_config['epochs']))
-        self.model.train(texts, labels, intents, self.component_config['epochs'])
+        self.model.train(texts, entities, entity_set)
 
     def process(self, message: Message, **kwargs: Any) -> None:
         """Process an incoming message.
@@ -111,25 +122,22 @@ class MyIntentClassifier(IntentClassifier):
         on any context attributes created by a call to
         :meth:`components.Component.process`
         of components previous to this one."""
-        print('---- MyIntentClassifier process')
+        print('---- MyEntityExtractor process')
         text = message.get(TEXT)
         if not text:
             return
         print("process:", text)
-        result = self.model.process(text)
-        pairs = [(prob, intent) for intent, prob in result.items()]
-        pairs = sorted(pairs, reverse=True)
-        highest = max(pairs)
-
-        message.set(INTENT, {"name": highest[1], "confidence": highest[0]}, add_to_output=True)
-
-        label_ranking = [{"name": intent, "confidence": prob, } for prob, intent in pairs]
-        message.set("intent_ranking", label_ranking, add_to_output=True)
+        extracted_entities = self.model.process(text)
+        print("call model and get entities:", extracted_entities)
+        extracted_entities = self.add_extractor_name(extracted_entities)
+        message.set(
+            ENTITIES, message.get(ENTITIES, []) + extracted_entities, add_to_output=True
+        )
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:
         """Persist this component to disk for future loading."""
 
-        print('---- MyIntentClassifier persist')
+        print('---- MyEntityExtractor persist')
 
         filepath = os.path.join(model_dir, file_name)
         print('filepath')
@@ -158,12 +166,12 @@ class MyIntentClassifier(IntentClassifier):
         :return: 
         """
         """Load this component from file."""
-        print('---- MyIntentClassifier load')
+        print('---- MyEntityExtractor load')
 
         file_name = meta.get("file")
         filepath = os.path.join(model_dir, file_name)
         # 加载模型
-        model = IntentModel()
+        model = EntityExtractorModel({})
         model.load(filepath)
 
         return cls(meta, model)
